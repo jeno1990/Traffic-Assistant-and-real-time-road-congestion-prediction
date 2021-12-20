@@ -1,2 +1,2 @@
 # final_year_project
-final year project mobile app
+push your code to your own branch and ask pullrequst before directly merging it to main branch
