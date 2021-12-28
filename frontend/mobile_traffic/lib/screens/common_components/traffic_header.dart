@@ -1,0 +1,1 @@
+//example of common component which is used by more than one screen 
