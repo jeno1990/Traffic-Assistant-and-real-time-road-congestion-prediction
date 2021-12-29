@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_traffic/screens/signup/signup.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,20 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('mobile Traffic'),
-        ),
-        body: Container(
-          color: Colors.blueGrey[600],
-          child: Center(
-            child: Text(
-              'starting of our project',
-              style: TextStyle(fontSize: 30),
-            ),
-          ),
-        ),
-      ),
+      home: Signup(),
     );
   }
 }
