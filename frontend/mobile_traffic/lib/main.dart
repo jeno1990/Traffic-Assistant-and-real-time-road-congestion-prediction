@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:driver_guid_and_violation_of_rule_avoidance/login.dart';
+import 'package:mobile_traffic/screens/signup/login.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  // const MyApp({ Key? key }) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home:  LogIn(),
+      home:
+      Login(),
     );
   }
 }
