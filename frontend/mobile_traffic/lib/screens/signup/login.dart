@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
-import 'package:mobile_traffic/screens/common_components/background_for_signup.dart';
+import 'package:mobile_traffic/screens/signup/components/background_for_signup.dart';
 
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 class Login extends StatefulWidget {
