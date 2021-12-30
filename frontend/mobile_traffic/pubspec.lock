@@ -81,7 +81,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.2.0"
-<<<<<<< HEAD
   get:
     dependency: "direct main"
     description:
@@ -89,8 +88,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.6.1"
-=======
->>>>>>> origin/main
   matcher:
     dependency: transitive
     description:
