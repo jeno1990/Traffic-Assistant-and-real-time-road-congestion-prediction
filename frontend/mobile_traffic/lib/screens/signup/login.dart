@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
+import 'package:mobile_traffic/screens/common_components/background_for_signup.dart';
+
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 class Login extends StatefulWidget {
   @override
@@ -15,37 +17,18 @@ class _LoginState extends State<Login> {
     return SafeArea(
       child: Scaffold(
           body: Stack(children: [
-        Container(
-            decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage(
-              'assets/world_map.png',
-            ),
-          ),
-        )),
-        Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: FractionalOffset.topCenter,
-                  end: FractionalOffset.bottomCenter,
-                  colors: [
-                Color.fromRGBO(72, 131, 246, 0.7),
-                Color.fromRGBO(0, 0, 0, 0.7)
-              ],
-                  stops: [
-                0.0,
-                1.0
-              ])),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        BackgroundSignUp(),
+        ListView(
           children: [
           
-          Positioned(
-            left: 15,
-            top: 25,
-            child: HeaderText('Welcome Back'),
+          Container(
+            alignment: Alignment.center,
+            padding:EdgeInsets.only(top:40),
+            child: Positioned(
+              left: 15,
+              top: 87,
+              child: HeaderText('Welcome Back'),
+            ),
           ),
           SizedBox(
             height: 50,
@@ -60,6 +43,13 @@ class _LoginState extends State<Login> {
                       border: UnderlineInputBorder(),
                       labelText: "Username",
                       labelStyle: TextStyle(color: Colors.white)),
+                      style:TextStyle(color:Colors.white),
+                      validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter name';
+                      }
+                      return null;
+                    }
                 ),
                 TextFormField(
                   obscureText: true,
@@ -68,9 +58,16 @@ class _LoginState extends State<Login> {
                       border: UnderlineInputBorder(),
                       labelText: "Password",
                       labelStyle: TextStyle(color: Colors.white)),
+                      validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter name';
+                      }
+                      return null;
+                    }
+
                 ),
                 Button('LogIn', () {}, Color.fromRGBO(72, 131, 246, 1)),
-                Button('SignIn', () {}, Color.fromRGBO(0, 193, 31, 0.25)),
+                Button('SignIn', () {}, Color.fromRGBO(0, 193, 31, 0.25)),]))),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -95,11 +92,11 @@ class _LoginState extends State<Login> {
                   style: TextButton.styleFrom(
                     textStyle:TextStyle( fontSize: 15,color:Colors.white)
                   ),
-                  child: Text('Forgot password ?'))
+                  child: Text('Forgot password ?',style:TextStyle(fontSize:15,color:Colors.white))),
               ],
-            )),
-          )
-        ])
+            )
+          
+        
       ])),
     );
   }
