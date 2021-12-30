@@ -4,6 +4,7 @@ import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:mobile_traffic/screens/signup/components/background_for_signup.dart';
 
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+
 class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
@@ -79,12 +80,12 @@ class _LoginState extends State<Login> {
                         height: 31, width: 31),
                   ),
                 ),
-                          SignInButton(
-                          Buttons.Facebook,
-                onPressed: () {},
-                     mini:true,
-                
-                        ),
+                SignInButton(
+                  Buttons.Facebook,
+                  onPressed: () {},
+                      mini:true,
+                  
+                          ),
                   ],
                 ),
                 TextButton(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
+<<<<<<< HEAD
 import 'package:mobile_traffic/screens/signup/welcome.dart';
+=======
+import 'package:mobile_traffic/screens/signup/signup.dart';
+>>>>>>> origin/main
 
 void main() {
   runApp(MyApp());
