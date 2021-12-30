@@ -35,16 +35,17 @@ class Signup extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(20),
                 child: Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: ListView(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: [                  // The validator receives the text that the user has entered.
                       // SizedBox(height: 30,),
                       // Container(padding: EdgeInsets.fromLTRB(20, 30, 0, 0),child: Text("sign up",style: TextStyle(fontSize: 36,color: Colors.white),)),
                      SizedBox(height: 20,),
-                     HeaderText('Signup'),
+                     Container(alignment: Alignment.center,child: HeaderText('Signup')),
                       SizedBox(height: 30,),
                       TextFormField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "First name",
@@ -58,6 +59,7 @@ class Signup extends StatelessWidget {
                         },
                       ),
                       TextFormField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "Last name",
@@ -71,6 +73,7 @@ class Signup extends StatelessWidget {
                         },
                       ),
                       TextFormField(
+                        
                         obscureText: true,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -99,7 +102,7 @@ class Signup extends StatelessWidget {
                         },
                       ),
                       SizedBox(height: 40,),
-                      Button('submit', (){}, Color(0xFF00C11F)),
+                      Button('submit', (){}, Color.fromRGBO(0, 193, 31, 0.25)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
