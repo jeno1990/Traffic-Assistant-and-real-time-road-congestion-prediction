@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_traffic/screens/common_components/traffic_background.dart';
 
 class Violations extends StatelessWidget {
   // const Violations({ Key? key }) : super(key: key);
@@ -18,7 +17,7 @@ class Violations extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Traffc_background(title),
+         // Traffc_background(title),
           Container(
             child: Column(
               children: [

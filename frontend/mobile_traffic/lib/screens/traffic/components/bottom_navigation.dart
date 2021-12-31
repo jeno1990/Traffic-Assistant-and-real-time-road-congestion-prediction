@@ -20,6 +20,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
     Text(
       'Index 2: School',
     ),
+     Text(
+      'Index 2: School',
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -30,10 +33,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type:BottomNavigationBarType.fixed,
        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notification_add),
