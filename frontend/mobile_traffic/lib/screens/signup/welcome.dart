@@ -3,6 +3,7 @@ import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:get/get.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
+import 'package:mobile_traffic/screens/traffic/violations.dart';
 
 class Welcome extends StatelessWidget {
   @override
@@ -34,7 +35,7 @@ class Welcome extends StatelessWidget {
           , Color.fromRGBO(31, 36, 158, 0.42)),
           Button('Traffic Police', () => {Get.to(Login())}
           , Color.fromRGBO(31, 36, 158, 0.42)),
-          Button('As Gust', () => {Get.to(Login())}
+          Button('As Gust', () => {Get.to(Violations())}
           , Color.fromRGBO(31, 36, 158, 0.42)),
         ]),
       )
