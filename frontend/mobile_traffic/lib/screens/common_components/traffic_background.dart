@@ -32,7 +32,7 @@ class _Traffc_backgroundState extends State<Traffc_background> {
                 height: 160,
                 width: size.width,
                 color: Colors.blue,
-                child: Container(padding: EdgeInsets.fromLTRB(50, 30, 0, 0) ,child: HeaderText('Violations')),
+                child: Container(padding: EdgeInsets.fromLTRB(50, 30, 0, 0) ,child: HeaderText( widget.header)),
               ),
               Positioned(
                 top: 10,
