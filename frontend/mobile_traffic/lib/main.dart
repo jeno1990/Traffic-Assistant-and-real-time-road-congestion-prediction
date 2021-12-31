@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mobile_traffic/screens/signup/welcome.dart';
 import 'package:get/get.dart';
+import 'package:mobile_traffic/screens/traffic/violations.dart';
 
 
 void main() {
@@ -13,9 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    
     return GetMaterialApp(
-      home:Welcome(),
+      debugShowCheckedModeBanner: false,
+      home:Welcome()
+
     );
   }
 }

@@ -216,9 +216,6 @@ class _Report_formState extends State<Report_form> {
       ),
     ]),
     bottomNavigationBar: BottomNavigation(),
-    )
-
-    
-    );
+    ));
   }
 }
