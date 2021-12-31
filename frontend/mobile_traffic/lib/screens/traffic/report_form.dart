@@ -84,8 +84,8 @@ class _Report_formState extends State<Report_form> {
              decoration: BoxDecoration(
                  color:Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(47),
-                  topRight: Radius.circular(47)
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40)
                 ),
              ),
            padding: EdgeInsets.only(top:10),
