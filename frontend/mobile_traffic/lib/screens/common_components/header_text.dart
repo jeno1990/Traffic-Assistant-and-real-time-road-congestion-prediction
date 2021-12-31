@@ -9,7 +9,7 @@ class HeaderText extends StatelessWidget {
               title,
               style: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.normal,
                   color: Colors.white,
