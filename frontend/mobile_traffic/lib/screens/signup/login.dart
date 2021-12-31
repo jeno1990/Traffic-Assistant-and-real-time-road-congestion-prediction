@@ -6,6 +6,7 @@ import 'package:mobile_traffic/screens/signup/signup.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:mobile_traffic/screens/traffic/report_form.dart';
 class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
@@ -68,7 +69,7 @@ class _LoginState extends State<Login> {
                     }
 
                 ),
-                Button('LogIn', () {}, Color.fromRGBO(72, 131, 246, 1)),
+                Button('LogIn', ()=> {Get.to(Report_form())}, Color.fromRGBO(72, 131, 246, 1)),
                 Button('SignIn', () => {Get.to(Signup())}, Color.fromRGBO(0, 193, 31, 0.25)),]))),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
