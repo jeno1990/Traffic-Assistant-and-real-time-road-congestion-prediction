@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
-
+import 'package:mobile_traffic/screens/driver/components/bottom_navigation.dart';
 class DriverTool extends StatefulWidget {
   // const DriverTool({ Key? key }) : super(key: key);
 
@@ -63,8 +63,10 @@ class _DriverToolState extends State<DriverTool> {
                               NearByGomista()              ]),
                           )),
                     ),
-                  ])),
-          // bottomNavigationBar: BottomNavigation(),
+                  ])
+                
+                  ),
+          bottomNavigationBar: BottomNavigation(),
         ),
       ),
     );
