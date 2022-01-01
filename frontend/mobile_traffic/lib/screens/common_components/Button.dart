@@ -9,7 +9,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top:20),
-      height: MediaQuery.of(context).size.width/5,
+    //  height: MediaQuery.of(context).size.width/5,
       child: SizedBox(
         width: double.infinity,
         child: RaisedButton(
