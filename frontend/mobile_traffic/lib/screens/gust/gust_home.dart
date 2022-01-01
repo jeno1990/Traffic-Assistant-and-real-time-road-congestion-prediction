@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:mobile_traffic/screens/driver/components/bottom_navigation.dart';
-class DriverTool extends StatelessWidget {
+import 'package:mobile_traffic/screens/common_components/Button.dart';
+
+class GustHome extends StatefulWidget {
   // const DriverTool({ Key? key }) : super(key: key);
 
+  @override
+  _GustHomeState createState() => _GustHomeState();
+}
+
+class _GustHomeState extends State<GustHome> {
+  final formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +41,10 @@ class DriverTool extends StatelessWidget {
                         child: TabBar(
                           tabs: [
                             Tab(
-                              text: 'NearBy Hotels',
+                              text: 'Report Issue',
                             ),
                             Tab(
-                              text: 'NearBy Garage',
+                              text: 'To see Tariff',
                             ),
                           ],
                         ),
@@ -54,14 +62,11 @@ class DriverTool extends StatelessWidget {
                                   topRight: Radius.circular(40))),
                           child: Container(
                             padding: EdgeInsets.all(20),
-                            child: TabBarView(children: [
-                              NearByHotel(),
-                              NearByGomista()              ]),
+                            child: TabBarView(
+                                children: [ReportIssue(), SeeTariff()]),
                           )),
                     ),
-                  ])
-                
-                  ),
+                  ])),
           bottomNavigationBar: BottomNavigation(),
         ),
       ),
@@ -79,61 +84,30 @@ class DriverTool extends StatelessWidget {
             )));
   }
 
-  Widget NearByGomista() {
-    return ListView.builder(
-      padding: EdgeInsets.only(top: 0),
-      // physics: NeverScrollableScrollPhysics(),
-      itemCount: 15,
-      shrinkWrap: true,
-      itemBuilder: (context, index) => Card(
-        color: Colors.white70,
-        child: ListTile(
-          // shape: ShapeBorder(),
-          tileColor: Colors.white,
-          leading: CircleAvatar(
-            child: Icon(Icons.car_repair), //Text("${index+1}"),
-          ),
-          title: Text("Fetan Gomista"),
-          subtitle: Text("195m away"),
-        ),
-      ),
-    );
-  }
-
-  Widget NearByHotel() {
-    return GridView.builder(
-                itemCount: 15,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 1,
-                  mainAxisSpacing: 1,
+  Widget ReportIssue() {
+    return Container(
+        padding: EdgeInsets.all(20),
+        child: Form(
+            key: formKey,
+            child: Column(children: [
+              Container(
+                child: Text('To report violation of rule'),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "what kind of violation you see",
                 ),
-                itemBuilder: (context, index) {
-                  
-                  return  ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: GridTile(
-                          child: GestureDetector(
-                            onTap: (){
-                            },
-                            child: Container(
-                                child:
-                                    Image.asset("assets/sharaton.jpg")),
-                          ),
-                          footer: GridTileBar(
-                            backgroundColor: Color.fromRGBO(0, 0, 0, 0.65),
-                            leading: Text(
-                              "Sharaton Addis",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            
-                            
-                                
-                            ),
-                          ));
-                    
-                  
-                });
-          }
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Plate number",
+                ),
+              ),
+              Button("Submit", () {}, Color.fromRGBO(72, 131, 246, 1))
+            ])));
   }
 
+  Widget SeeTariff() {
+    return Container();
+  }
+}

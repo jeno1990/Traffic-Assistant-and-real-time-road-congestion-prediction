@@ -4,40 +4,8 @@ import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 
-class Report_form extends StatefulWidget {
-  @override
-  State<Report_form> createState() => _Report_formState();
-}
-
-class _Report_formState extends State<Report_form> {
-  String _violation;
-  bool _isActive=true;
-  String _actionTaken;
-  String _actionTakenResult;
-
-  String _violationResult;
-  final formKey = new GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _violation = '';
-    _violationResult = '';
-    _actionTaken = "";
-    _actionTakenResult = "";
-  }
-
-  _saveForm() {
-    var form = formKey.currentState;
-    if (form.validate()) {
-      form.save();
-      setState(() {
-        _actionTakenResult = _actionTaken;
-        _violationResult = _violation;
-      });
-    }
-  }
-
+class Report_form extends StatelessWidget {
+ 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,16 +32,10 @@ class _Report_formState extends State<Report_form> {
              ),
                       IconButton(
                         onPressed: (){
-                        
-                                        setState(() {
-                      if(_isActive==true){
-                        _isActive=false;
-                      }else{
-                        _isActive=true;
-                      }
-                                        });
-                                      },
-                                      icon: Icon(_isActive?Icons.visibility:Icons.visibility_off)),
+                       
+                                        },
+                                      
+                                      icon: Icon(true?Icons.visibility:Icons.visibility_off)),
            ],
          ),
        ),
@@ -105,7 +67,7 @@ class _Report_formState extends State<Report_form> {
                     Container(
                     padding: EdgeInsets.all(20),
                     child: Form(
-                    key: formKey,
+                  //  key: formKey,
                     child: Column(children: [
                       TextFormField(
                         decoration: InputDecoration(
@@ -120,17 +82,17 @@ class _Report_formState extends State<Report_form> {
                           child: DropDownFormField(
                             
                             titleText: 'Violation type',
-                            value: _violation,
-                            onSaved: (value) {
-                              setState(() {
-                                _violation = value;
-                              });
-                            },
-                            onChanged: (value) {
-                              setState(() {
-                                _violation = value;
-                              });
-                            },
+                            // value: _violation,
+                            // onSaved: (value) {
+                            //   setState(() {
+                            //     _violation = value;
+                            //   });
+                            // },
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     _violation = value;
+                            //   });
+                            // },
                             dataSource: [
                               {
                                 "display": "Over Speed",
@@ -162,17 +124,17 @@ class _Report_formState extends State<Report_form> {
                         padding: EdgeInsets.only(top: 5),
                         child: DropDownFormField(
                           titleText: 'Action Taken',
-                          value: _actionTaken,
-                          onSaved: (value) {
-                            setState(() {
-                              _actionTaken = value;
-                            });
-                          },
-                          onChanged: (value) {
-                            setState(() {
-                              _actionTaken = value;
-                            });
-                          },
+                          // value: _actionTaken,
+                          // onSaved: (value) {
+                          //   setState(() {
+                          //     _actionTaken = value;
+                          //   });
+                          // },
+                          // onChanged: (value) {
+                          //   setState(() {
+                          //     _actionTaken = value;
+                          //   });
+                         
                           dataSource: [
                             {
                               "display": "Suspend Driving Licence",

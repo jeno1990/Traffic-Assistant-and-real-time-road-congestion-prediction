@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:get/get.dart';
+import 'package:mobile_traffic/screens/gust/gust_home.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
+import 'package:mobile_traffic/screens/signup/signup.dart';
 import 'package:mobile_traffic/screens/traffic/violations.dart';
 
 class Welcome extends StatelessWidget {
@@ -31,11 +33,11 @@ class Welcome extends StatelessWidget {
           HeaderText("Welcome"),
           Button('Office', () => {Get.to(Login())},
               Color.fromRGBO(31, 36, 158, 0.42)),
-          Button('Car Owner', () => {Get.to(Login())}
+          Button('Car Owner', () => {Get.to(Signup())}
           , Color.fromRGBO(31, 36, 158, 0.42)),
           Button('Traffic Police', () => {Get.to(Login())}
           , Color.fromRGBO(31, 36, 158, 0.42)),
-          Button('As Gust', () => {Get.to(Violations())}
+          Button('As Gust', () => {Get.to(GustHome())}
           , Color.fromRGBO(31, 36, 158, 0.42)),
         ]),
       )

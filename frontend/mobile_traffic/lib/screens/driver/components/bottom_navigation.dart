@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_traffic/screens/traffic/report_form.dart';
-import 'package:mobile_traffic/screens/traffic/violations.dart';
+
 class BottomNavigation extends StatefulWidget {
  // const ButtomNavigation({ Key? key }) : super(key: key);
 
@@ -12,8 +11,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-   // Violations,
-    //Report_form(),
+    Text(
+      'Index 0: Home',
+    ),
     Text(
       'Index 1: Business',
     ),
@@ -22,6 +22,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
     ),
      Text(
       'Index 2: School',
+    ),
+     Text(
+      'Index 3: School',
+    ),
+     Text(
+      'Index 4: School',
     ),
   ];
 
@@ -40,8 +46,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Icon(Icons.flag),
+            label: 'Tools',
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Reminder',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notification_add),
