@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
-
-class DriverTool extends StatefulWidget {
+import 'package:mobile_traffic/screens/driver/components/bottom_navigation.dart';
+class DriverTool extends StatelessWidget {
   // const DriverTool({ Key? key }) : super(key: key);
 
-  @override
-  _DriverToolState createState() => _DriverToolState();
-}
 
-class _DriverToolState extends State<DriverTool> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -63,8 +59,10 @@ class _DriverToolState extends State<DriverTool> {
                               NearByGomista()              ]),
                           )),
                     ),
-                  ])),
-          // bottomNavigationBar: BottomNavigation(),
+                  ])
+                
+                  ),
+          bottomNavigationBar: BottomNavigation(),
         ),
       ),
     );

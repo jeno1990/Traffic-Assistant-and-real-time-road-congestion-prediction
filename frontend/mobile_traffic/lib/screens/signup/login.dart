@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_traffic/screens/driver/driverHome.dart';
+import 'package:mobile_traffic/screens/driver/driver_home.dart';
 import 'package:mobile_traffic/screens/driver/driver_tool.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
@@ -10,13 +10,8 @@ import 'package:get/get.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:mobile_traffic/screens/traffic/report_form.dart';
 import 'package:mobile_traffic/screens/traffic/violations.dart';
-class Login extends StatefulWidget {
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+class Login extends StatelessWidget {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +67,7 @@ class _LoginState extends State<Login> {
                     }
 
                 ),
-                Button('LogIn', ()=> {Get.to(DriverHome())}, Color.fromRGBO(72, 131, 246, 1)),
+                Button('LogIn', ()=> {Get.to(Violations())}, Color.fromRGBO(72, 131, 246, 1)),
                 Button('SignIn', () => {Get.to(Signup())}, Color.fromRGBO(0, 193, 31, 0.25)),]))),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

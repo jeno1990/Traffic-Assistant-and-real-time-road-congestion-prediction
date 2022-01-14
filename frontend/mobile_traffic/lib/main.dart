@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_traffic/screens/driver/driverHome.dart';
+import 'package:mobile_traffic/screens/driver/driver_home.dart';
 
 import 'package:mobile_traffic/screens/signup/welcome.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:mobile_traffic/screens/traffic/report_form.dart';
+import 'package:mobile_traffic/screens/traffic/violations.dart';
 class BottomNavigation extends StatefulWidget {
  // const ButtomNavigation({ Key? key }) : super(key: key);
 
@@ -11,9 +12,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-    ),
+   // Violations,
+    //Report_form(),
     Text(
       'Index 1: Business',
     ),
