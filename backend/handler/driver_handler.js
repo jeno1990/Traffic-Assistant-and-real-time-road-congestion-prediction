@@ -1,13 +1,11 @@
-const express= require('express');
 var bcrypt = require("bcryptjs");
 //bcryptjs is used for password hash
 
 // Get Users model which we have created above
 
-const Driver =require("../../models/driver.model");
-const router =express.Router();
+const Driver =require("../models/driver.model");
 
-router.route("/driver_signup").post((req, res)=> {
+const driver_signup=function(req, res) {
     console.log('inside the drver_signup');
 
     //we will get these data from requst body i.e. we have to provide this data will calling this api
@@ -65,5 +63,62 @@ router.route("/driver_signup").post((req, res)=> {
         }
       });
     }
-  });
-  module.exports=router;
+  }
+  const driver_login=function(req,res){
+    console.log('inside the drver_login');
+
+    let { email, password } = req.body;
+    //checks that both email and password is provided at api call
+    if (email === "" || password === "") {
+      res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
+    } else {
+      //check the provided email with  our database
+      Driver.findOne({ email: email }, (err, driver) => {
+        if (err) {
+          res.json({ status: 0, message: err });
+        }
+        // if the email is not found , respond user that this email is not found
+        if (!driver) {
+          res.json({
+
+            status: 0,
+            msg:
+              " user with this email didnot found"
+          });
+          } else {
+          //if email found hash the password for the comparision as our system have hashed password
+          bcrypt.compare(password, driver.password, (err, isMatch) => {
+            if (err) {
+              res.json({ status: 0, data: err, msg: " error" });
+            } else {
+              //if passowrd didnt match respond to the user
+              if (!isMatch) {
+            res.status(401)
+
+                res.json({
+                  status: 0,
+                  data: isMatch,
+                  msg: " Password didnt match"
+                });
+              } else {
+                // if email and password match , respond that to user
+                res.json({
+                  status: 1,
+                  data: {
+                    id: driver.id,
+                    name: driver.name,
+                    email: driver.email,
+                    type: driver.type
+                  },
+                  msg: "Welcome " + email
+                });
+              }
+            }
+          });
+        }
+      });
+    }
+  }
+module.exports={
+    driver_signup,driver_login
+}
