@@ -13,19 +13,12 @@ const Gust= new mongoose.Schema(
             
             
         },
-    
-       
-            plate_number:{
-                type:String,
+
+        plate_number:{
+            type:String,
             required:true,
-
-               
+  
             },
-           
-       
-        
-        
-
     }
 );
 
