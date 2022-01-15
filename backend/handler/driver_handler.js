@@ -1,4 +1,5 @@
 var bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 //bcryptjs is used for password hash
 
 // Get Users model which we have created above
@@ -10,25 +11,26 @@ const driver_signup=function(req, res) {
     console.log('inside the drver_signup');
 
     //we will get these data from requst body i.e. we have to provide this data will calling this api
-    let {full_name,email,password} = req.body;
-  //verify if we go all of these data or not
+    let {first_name,last_name,email,password} = req.body;
     if (full_name === "" || email === "" || password === "" ) {
-      //if any of the data is missing we will send this response to user
+      res.status(400); //which mean staus bad request
       res.json({ status: 0, data: "error", msg: " Enter all fields" });
     } else {
-      //if all the data is provided, it checks that email provides is alredy used or not in our system
-      Driver.findOne({ email: email }, function(err, driver) {
+      
+      Driver.findOne({ email: email}, function(err, driver) {
         if (err) console.log(err);
-  
         if (driver) {
           //if used, return thi message
-          res.json({ status: 0, data: driver.email, msg: " Driver already exists" });
+          res.status(409);
+          res.json({ status: 0, data: driver.email, msg: "user with this email already exists" });
         } else {
           //if not used, create a new obnect od our user schema and store it in it
           var driver = new Driver({
-            full_name: full_name,
-            email: email,
+            first_name: first_name,
+            last_name: last_name,
+            email: email.toLowerCase(),
             password: password,
+            
           });
          //then hash the provides password with  bcryptjs package
           bcrypt.genSalt(10, function(err, salt) {
@@ -41,7 +43,6 @@ const driver_signup=function(req, res) {
                   msg: " error while hashing password"
                 });
               }
-  
               driver.password = hash;
   //if everything is ok and password is hashe, then user bojcet that we created aboue will be saved in our database
               driver.save(function(err) {
@@ -52,12 +53,13 @@ const driver_signup=function(req, res) {
                   res.json({ status: 0, data: err, msg: " error" });
                 } else {
                   //Send response to the user that registration process is complete
-                res.json({
-                    status: 1,
-                    data: driver,
-                    msg: `Thank You for registering.`
-                  });
-                }
+                  res.status(201);
+                  res.json({
+                      status: 1,
+                      data: driver,
+                      msg: `Thank You for registering.`
+                    });
+                  }
               });
             });
           });
@@ -65,41 +67,50 @@ const driver_signup=function(req, res) {
       });
     }
   }
-  const driver_login=function(req,res){
-    console.log('inside the drver_login');
 
+
+  const driver_login=function(req,res){
     let { email, password } = req.body;
     //checks that both email and password is provided at api call
     if (email === "" || password === "") {
+      res.status(400);
       res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
     } else {
-      //check the provided email with  our database
       Driver.findOne({ email: email }, (err, driver) => {
         if (err) {
+          res.status(500);
           res.json({ status: 0, message: err });
         }
         // if the email is not found , respond user that this email is not found
         if (!driver) {
+          res.status(401);
           res.json({
-
             status: 0,
-            msg:
-              " user with this email didnot found"
+            msg:" user with this email didnot found"
           });
           } else {
           //if email found hash the password for the comparision as our system have hashed password
-          bcrypt.compare(password, driver.password, (err, isMatch) => {
+          bcrypt.compare(password , driver.password, (err, isMatch) => {
+
+            //
+              const token = jwt.sign(
+                {user_id: driver._id,email},
+                process.env.TOKEN_KEY,
+                {expiresIn : "15m"},
+              );
+              driver.token = token;
+            //
+
             if (err) {
               res.json({ status: 0, data: err, msg: " error" });
             } else {
               //if passowrd didnt match respond to the user
               if (!isMatch) {
             res.status(401)
-
                 res.json({
                   status: 0,
                   data: isMatch,
-                  msg: " Password didnt match"
+                  msg: "invalid user credentials doesn't match"
                 });
               } else {
                 // if email and password match , respond that to user
@@ -109,7 +120,8 @@ const driver_signup=function(req, res) {
                     id: driver.id,
                     name: driver.name,
                     email: driver.email,
-                    type: driver.type
+                    type: driver.type,
+                    token:driver.token
                   },
                   msg: "Welcome " + email
                 });
