@@ -14,17 +14,30 @@ const Driver= new mongoose.Schema(
         password:{
             type:String,
         },
-        accident_type:{
+        confirm_password:{
             type:String,
+            
         },
-        plate_number:{
-            type:String,
-           
-        },
-        accident_occerance_time:{
-            type:String,
-           
-        },
+       report_accident:[
+           {
+
+            accident_type:{
+                type:String,
+                
+            },
+            plate_number:{
+                type:String,
+               
+            },
+            accident_occerance_time:{
+                type:String,
+               
+            },
+           }
+       ]
+        
+        
+
     }
 );
 
