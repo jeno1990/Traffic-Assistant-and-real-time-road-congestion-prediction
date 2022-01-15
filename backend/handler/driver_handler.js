@@ -4,6 +4,7 @@ var bcrypt = require("bcryptjs");
 // Get Users model which we have created above
 
 const Driver =require("../models/driver.model");
+const Report_accident=require("../models/report_accident.model");
 
 const driver_signup=function(req, res) {
     console.log('inside the drver_signup');
@@ -119,6 +120,34 @@ const driver_signup=function(req, res) {
       });
     }
   }
+  const accident_report=function (req,res) {
+ 
+    console.log('inside the traffic_report_form');
+
+    let { accident_type, plate_number} = req.body;
+    //checks that both email and password is provided at api call
+    if (accident_type === "" || plate_number === "") {
+      res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
+    } else {
+      //check the provided email with  our database
+      var accident_form = new Report_accident({
+        //driver_id:"Mongoose.ObjectId_of_driver",
+        accident_type: accident_type,
+        plate_number: plate_number,
+  
+      });
+
+      accident_form.save().then(()=>{
+         
+          res.status(200).json('form register successful');
+      } ).catch(
+          (err)=>{
+              console.log('error');
+              res.status(403).json(err);
+          }
+      );
+      
+        }}  
 module.exports={
-    driver_signup,driver_login
+    driver_signup,driver_login,accident_report
 }

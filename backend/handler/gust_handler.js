@@ -1,7 +1,3 @@
-var bcrypt = require("bcryptjs");
-//bcryptjs is used for password hash
-
-// Get Users model which we have created above
 
 const Gust =require("../models/gust.model");
 

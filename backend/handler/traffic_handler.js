@@ -1,9 +1,13 @@
 var bcrypt = require("bcryptjs");
+
 //bcryptjs is used for password hash
 
 // Get Users model which we have created above
 
 const Traffic =require("../models/traffic.model");
+const Report_accident = require("../models/report_accident.model");
+const TrafficReport = require("../models/traffic_report_form.model");
+const Gust=require('../models/gust.model')
 
 const traffic_signup=function(req, res) {
     console.log('inside the drver_signup');
@@ -120,15 +124,65 @@ const traffic_signup=function(req, res) {
     }
   }
   const issued_cases=function (req,res) {
-
-
-      
+    //
+Report_accident.find().select(' accident_type plate_number ').exec(
+  (err,alart)=>{
+    if(err){
+      res.send("error"+err)
+    }
+    else{
+      res.send(alart)
+    }
+  }
+)    
   }
   const reported_cases=function (req,res) {
-
+    Gust.find().select(' violation_type plate_number ').exec(
+      (err,alart)=>{
+        if(err){
+          res.send("error"+err)
+        }
+        else{
+          res.send(alart)
+        }
+      }
+    ) 
     
       
 }
+const traffic_report_form=function (req,res) {
+ 
+    console.log('inside the traffic_report_form');
+
+    let { violation_type, plate_number,driver_name,action_taken, comment,} = req.body;
+    //checks that both email and password is provided at api call
+    if (violation_type === "" || plate_number === ""|| driver_name === ""||action_taken === "" || comment=== "") {
+      res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
+    } else {
+      //check the provided email with  our database
+      var traffic_report = new TrafficReport({
+        traffic_id:"Mongoose.ObjectId_of_traffic_police",
+        driver_name: driver_name,
+        violation_type: violation_type,
+        plate_number: plate_number,
+        action_taken:action_taken,
+        comment:comment
+      });
+
+      traffic_report.save().then(()=>{
+         
+          res.status(200).json('form register successful');
+      } ).catch(
+          (err)=>{
+              console.log('error');
+              res.status(403).json(err);
+          }
+      );
+      
+        }}    
+      
+    
+ 
 module.exports={
-    traffic_signup,traffic_login,issued_cases,reported_cases
+    traffic_signup,traffic_login,issued_cases,reported_cases,traffic_report_form
 }

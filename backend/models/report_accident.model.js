@@ -3,7 +3,7 @@ const mongoose =require('mongoose');
 const Reported_accident= new mongoose.Schema(
     {
         driver_id:{
-            type:ObjectId,
+            type:mongoose.Schema.ObjectId,
             
         },
 
