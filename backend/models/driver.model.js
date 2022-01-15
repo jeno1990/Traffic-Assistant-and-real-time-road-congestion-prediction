@@ -22,6 +22,9 @@ const Driver = new schema(
             type:String,
             required: true
         },
+        token: { 
+            type: String 
+        },
 
     },{timestamps:true}
 );
