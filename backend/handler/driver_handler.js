@@ -3,7 +3,7 @@ var bcrypt = require("bcryptjs");
 
 // Get Users model which we have created above
 
-const Driver =require("../models/driver.model");
+const Driver = require("../models/driver.model");
 
 const driver_signup=function(req, res) {
     console.log('inside the drver_signup');

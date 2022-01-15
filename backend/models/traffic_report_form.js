@@ -28,10 +28,6 @@ const Traffic_form= new mongoose.Schema(
                    
                 },
 
-
-       
-        
-
     }
 );
 

@@ -1,6 +1,8 @@
 const mongoose =require('mongoose');
-//traffic schema
-const Traffic= new mongoose.Schema(
+const schema = mongoose.Schema;
+
+
+const Traffic = new schema(
     {
        
         email:{
@@ -8,51 +10,22 @@ const Traffic= new mongoose.Schema(
             required:true,
             unique:true
         },
-        full_name:{
+        first_name:{
             type:String,
-            
-            
+            // required: true
+        },
+        last_name:{
+            type:String,
+            required:false
         },
         password:{
             type:String,
-            
+            required: true
         },
-        confirm_password:{
-            type:String,
-            
-        },
-        report_form:[
-            {
-                violtion_type:{
-                    type:String,
-                    
-                },
-                plate_number:{
-                    type:String,
-                   
-                },
-                action_taken:{
-                    type:String,
-                   
-                },
-                driver_name:{
-                    type:String,
-                   
-                },
-                comment:{
-                    type:String,
-                   
-                },
 
-
-            }
-        ]
-       
-       
-        
-
-    }
+    },{timestamps:true}
 );
 
+// const Driver = mongoose.model( "Driver", Driver );
 
-module.exports=mongoose.model("Traffic",Traffic);
+module.exports = mongoose.model( "Traffic", Traffic );
