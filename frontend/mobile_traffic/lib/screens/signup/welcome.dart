@@ -31,6 +31,7 @@ class Welcome extends StatelessWidget {
         padding: EdgeInsets.all(50),
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           HeaderText("Welcome"),
+          
           Button('Office', () => {Get.to(Login())},
               Color.fromRGBO(31, 36, 158, 0.42)),
           Button('Car Owner', () => {Get.to(Signup())}
