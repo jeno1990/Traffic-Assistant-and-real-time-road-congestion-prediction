@@ -10,21 +10,12 @@ const Driver= new mongoose.Schema(
         },
         full_name:{
             type:String,
-            
-            
         },
         password:{
             type:String,
-            
         },
-        confirm_password:{
-            type:String,
-            
-        },
-       
         accident_type:{
             type:String,
-            
         },
         plate_number:{
             type:String,
@@ -34,8 +25,6 @@ const Driver= new mongoose.Schema(
             type:String,
            
         },
-        
-
     }
 );
 
