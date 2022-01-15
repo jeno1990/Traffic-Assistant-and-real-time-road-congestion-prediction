@@ -21,33 +21,6 @@ const Traffic= new mongoose.Schema(
             type:String,
             
         },
-        report_form:[
-            {
-                violtion_type:{
-                    type:String,
-                    
-                },
-                plate_number:{
-                    type:String,
-                   
-                },
-                action_taken:{
-                    type:String,
-                   
-                },
-                driver_name:{
-                    type:String,
-                   
-                },
-                comment:{
-                    type:String,
-                   
-                },
-
-
-            }
-        ]
-       
        
         
 

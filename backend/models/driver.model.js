@@ -21,23 +21,7 @@ const Driver= new mongoose.Schema(
             type:String,
             
         },
-       report_accident:[
-           {
-
-            accident_type:{
-                type:String,
-                
-            },
-            plate_number:{
-                type:String,
-               
-            },
-            accident_occerance_time:{
-                type:String,
-               
-            },
-           }
-       ]
+      
         
         
 
