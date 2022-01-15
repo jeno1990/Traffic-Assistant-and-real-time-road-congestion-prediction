@@ -1,6 +1,8 @@
 const mongoose =require('mongoose');
-//Driver schema
-const Driver= new mongoose.Schema(
+const schema = mongoose.Schema;
+
+
+const Driver = new schema(
     {
        
         email:{
@@ -8,25 +10,22 @@ const Driver= new mongoose.Schema(
             required:true,
             unique:true
         },
-        full_name:{
+        first_name:{
             type:String,
-            
-            
+            // required: true
+        },
+        last_name:{
+            type:String,
+            required:false
         },
         password:{
             type:String,
-            
+            required: true
         },
-        confirm_password:{
-            type:String,
-            
-        },
-      
-        
-        
 
-    }
+    },{timestamps:true}
 );
 
+// const Driver = mongoose.model( "Driver", Driver );
 
-module.exports=mongoose.model("Driver",Driver);
+module.exports = mongoose.model( "Driver", Driver );
