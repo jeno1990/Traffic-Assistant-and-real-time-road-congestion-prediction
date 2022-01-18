@@ -115,15 +115,32 @@ const traffic_signup=function(req, res) {
     }
   }
   const issued_cases=function (req,res) {
-
-
-      
+    //
+Report_accident.find().select(' accident_type plate_number ').exec(
+  (err,alart)=>{
+    if(err){
+      res.send("error"+err)
+    }
+    else{
+      res.send(alart)
+    }
+  }
+)    
   }
   const reported_cases=function (req,res) {
-
+    Gust.find().select(' violation_type plate_number ').exec(
+      (err,alart)=>{
+        if(err){
+          res.send("error"+err)
+        }
+        else{
+          res.send(alart)
+        }
+      }
+    ) 
     
       
   }
 module.exports={
-    traffic_signup,traffic_login,issued_cases,reported_cases
+    traffic_signup,traffic_login,issued_cases,reported_cases,traffic_report_form
 }

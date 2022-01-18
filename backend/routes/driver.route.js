@@ -1,4 +1,6 @@
-const express = require('express');
+const express= require('express');
+const { driver_signup, driver_login,accident_report } = require('../handler/driver_handler');
+
 const auth = require("../middlewares/auth");
 const driver = require('../handler/driver_handler');
 const traffic =  require('../handler/traffic_handler');

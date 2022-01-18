@@ -3,11 +3,11 @@ const mongoose =require('mongoose');
 const Traffic_form= new mongoose.Schema(
     {
         traffic_id:{
-            type:ObjectId,
+            type:mongoose.Schema.ObjectId,
             
         },
        
-                violtion_type:{
+        violation_type:{
                     type:String,
                     
                 },

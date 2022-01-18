@@ -9,6 +9,8 @@ const app=express();
 
 
 app.use(express.json());
+const userRoute =require('./routes/traffic.route');
+app.use("/traffic",userRoute);
 const connection = mongoose.connection;
 
 connection.once("open",()=>console.log('mongodb connected'));
