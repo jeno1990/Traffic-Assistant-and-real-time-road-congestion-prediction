@@ -2,7 +2,7 @@ var bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 //bcryptjs is used for password hash
 
-// Get Users model which we have created above
+// Get Users model which we have created 
 
 const Driver =require("../models/driver.model");
 const Report_accident=require("../models/report_accident.model");
