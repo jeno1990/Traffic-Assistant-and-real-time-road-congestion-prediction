@@ -16,12 +16,21 @@ const Traffic = new schema(
         },
         last_name:{
             type:String,
+            default:"",
             required:false
         },
         password:{
             type:String,
             required: true
         },
+        isActive: {
+            type: Boolean,
+            default: false
+        },
+        location:{
+            latitude: {type:Number},
+            longitude: {type:Number}
+        }
 
     },{timestamps:true}
 );

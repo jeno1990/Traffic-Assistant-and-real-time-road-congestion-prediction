@@ -1,17 +1,16 @@
 var bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
-//bcryptjs is used for password hash
-
-// Get Users model which we have created above
-
+const {DriverById} = require('../config/driver')
 const Driver = require("../models/driver.model");
+
+
 
 const driver_signup=function(req, res) {
     console.log('inside the drver_signup');
 
     //we will get these data from requst body i.e. we have to provide this data will calling this api
     let {first_name,last_name,email,password} = req.body;
-    if (full_name === "" || email === "" || password === "" ) {
+    if (first_name === "" || email === "" || password === "" ) {
       res.status(400); //which mean staus bad request
       res.json({ status: 0, data: "error", msg: " Enter all fields" });
     } else {
@@ -131,6 +130,41 @@ const driver_signup=function(req, res) {
       });
     }
   }
+
+const findDriverById = function(req , res){
+  let driver_id = req.params.driver_id;
+  console.log(driver_id)
+  if(driver_id===""){
+    res.status(400);
+    res.json({msg:"driver_id field required"});
+  }else{
+    Driver.findOne({"_id":driver_id}, (err , driver)=>{
+      console.log(driver)
+      if(err){
+        res.status(500);
+        res.json({msg:"internal server error"})
+      }else{
+        if(!driver){
+          res.status(401);
+          res.json({msg:"driver not found"})
+        }else{
+          res.status(200)
+          res.json({
+            data:{
+              id:driver.id,
+              first_name: driver.first_name,
+              last_name: driver.last_name,
+              email:driver.email,
+            }
+          })
+        }
+      }
+    }
+    )}
+
+}
+
+
 module.exports={
-    driver_signup,driver_login
+    driver_signup,driver_login,findDriverById
 }
