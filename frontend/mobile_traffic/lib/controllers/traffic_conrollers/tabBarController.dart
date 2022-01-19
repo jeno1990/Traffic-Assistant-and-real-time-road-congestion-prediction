@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class Tabcontroller extends GetxController with SingleGetTickerProviderMixin{
-  TabController controller;
+ late TabController? controller;
   
   @override
   void onInit() {
@@ -12,7 +12,7 @@ class Tabcontroller extends GetxController with SingleGetTickerProviderMixin{
   @override
   void onClose() {
     // TODO: implement onClose
-    controller.dispose();
+    controller!.dispose();
     super.onClose();
   }
 }

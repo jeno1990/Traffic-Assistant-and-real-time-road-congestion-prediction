@@ -11,8 +11,8 @@ const driver_signup=function(req, res) {
     console.log('inside the drver_signup');
 
     //we will get these data from requst body i.e. we have to provide this data will calling this api
-    let {first_name,last_name,email,password} = req.body;
-    if (full_name === "" || email === "" || password === "" ) {
+    let {first_name,last_name,email,phone_number,address,password} = req.body;
+    if (first_name === "" || email === "" || password === ""|| phone_number === "" || address === "" || last_name === ""  ) {
       res.status(400); //which mean staus bad request
       res.json({ status: 0, data: "error", msg: " Enter all fields" });
     } else {
@@ -29,6 +29,9 @@ const driver_signup=function(req, res) {
             first_name: first_name,
             last_name: last_name,
             email: email.toLowerCase(),
+            phone_number: phone_number,
+            address: address,
+
             password: password,
             
           });
@@ -96,7 +99,7 @@ const driver_signup=function(req, res) {
               const token = jwt.sign(
                 {user_id: driver._id,email},
                 process.env.TOKEN_KEY,
-                {expiresIn : "15m"},
+                {expiresIn : "15"},
               );
               driver.token = token;
             //
@@ -134,7 +137,7 @@ const driver_signup=function(req, res) {
   }
   const accident_report=function (req,res) {
  
-    console.log('inside the traffic_report_form');
+    console.log('inside the driver_report_form');
 
     let { accident_type, plate_number} = req.body;
     //checks that both email and password is provided at api call
@@ -143,7 +146,7 @@ const driver_signup=function(req, res) {
     } else {
       //check the provided email with  our database
       var accident_form = new Report_accident({
-        //driver_id:"Mongoose.ObjectId_of_driver",
+      //s  driver_id:req.params.id,
         accident_type: accident_type,
         plate_number: plate_number,
   

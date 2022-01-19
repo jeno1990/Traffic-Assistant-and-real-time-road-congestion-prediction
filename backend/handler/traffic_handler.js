@@ -159,9 +159,8 @@ const traffic_report_form=function (req,res) {
     if (violation_type === "" || plate_number === ""|| driver_name === ""||action_taken === "" || comment=== "") {
       res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
     } else {
-      //check the provided email with  our database
       var traffic_report = new TrafficReport({
-        traffic_id:"Mongoose.ObjectId_of_traffic_police",
+        traffic_id:req.params.id,
         driver_name: driver_name,
         violation_type: violation_type,
         plate_number: plate_number,
