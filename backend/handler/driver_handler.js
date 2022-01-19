@@ -1,11 +1,10 @@
 var bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
-//bcryptjs is used for password hash
+const {DriverById} = require('../config/driver')
+const Driver = require("../models/driver.model");
 
 // Get Users model which we have created 
 
-const Driver =require("../models/driver.model");
-const Report_accident=require("../models/report_accident.model");
 
 const driver_signup=function(req, res) {
     console.log('inside the drver_signup');
@@ -140,29 +139,52 @@ const driver_signup=function(req, res) {
     console.log('inside the driver_report_form');
 
     let { accident_type, plate_number} = req.body;
-    //checks that both email and password is provided at api call
+    
     if (accident_type === "" || plate_number === "") {
       res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
     } else {
-      //check the provided email with  our database
-      var accident_form = new Report_accident({
+      
+       Report_accident({
       //s  driver_id:req.params.id,
         accident_type: accident_type,
         plate_number: plate_number,
   
-      });
+      });}}
 
-      accident_form.save().then(()=>{
-         
-          res.status(200).json('form register successful');
-      } ).catch(
-          (err)=>{
-              console.log('error');
-              res.status(403).json(err);
-          }
-      );
-      
-        }}  
+const findDriverById = function(req , res){
+  let driver_id = req.params.driver_id;
+  console.log(driver_id)
+  if(driver_id===""){
+    res.status(400);
+    res.json({msg:"driver_id field required"});
+  }else{
+    Driver.findOne({"_id":driver_id}, (err , driver)=>{
+      console.log(driver)
+      if(err){
+        res.status(500);
+        res.json({msg:"internal server error"})
+      }else{
+        if(!driver){
+          res.status(401);
+          res.json({msg:"driver not found"})
+        }else{
+          res.status(200)
+          res.json({
+            data:{
+              id:driver.id,
+              first_name: driver.first_name,
+              last_name: driver.last_name,
+              email:driver.email,
+            }
+          })
+        }
+      }
+    }
+    )}
+
+}
+
+
 module.exports={
-    driver_signup,driver_login,accident_report
+    driver_signup,driver_login,findDriverById,accident_report
 }

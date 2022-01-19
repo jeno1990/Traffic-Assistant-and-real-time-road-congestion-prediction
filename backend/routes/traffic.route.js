@@ -11,4 +11,4 @@ router.get("/issued_cases/id",issued_cases);
 router.get("/reported_cases/:id",reported_cases);
 
 
-  module.exports=router;
+module.exports=router;
