@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/driver/driver_home.dart';
+import 'package:mobile_traffic/screens/driver/map.dart';
+import 'package:mobile_traffic/screens/driver/osmap.dart';
 
 import 'package:mobile_traffic/screens/signup/welcome.dart';
 import 'package:get/get.dart';
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return GetMaterialApp(
+      title: 'traffic mobile app',
       debugShowCheckedModeBanner: false,
       home:Welcome()
 
