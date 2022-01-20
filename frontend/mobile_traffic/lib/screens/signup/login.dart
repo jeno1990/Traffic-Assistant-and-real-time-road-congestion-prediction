@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/models/login_request_model.dart';
+import 'package:mobile_traffic/screens/driver/driver_dashboard.dart';
 import 'package:mobile_traffic/screens/driver/driver_home.dart';
 import 'package:mobile_traffic/screens/driver/driver_tool.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
@@ -88,11 +89,11 @@ class _LoginState extends State<Login> {
                           });
 
                           if (response) {
-                            Get.to(DriverHome());
+                            Get.toNamed('/driver_home');
                           } else {
                             Get.snackbar(
                                 "errors", "Invalid Username/password!!",
-                                duration: Duration(seconds: 10) ,
+                                duration: Duration(seconds: 10),
                                 snackPosition: SnackPosition.BOTTOM);
                           }
                         });
