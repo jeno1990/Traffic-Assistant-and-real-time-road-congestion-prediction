@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
-import 'package:mobile_traffic/screens/driver/components/bottom_navigation.dart';
 class DriverTool extends StatelessWidget {
   // const DriverTool({ Key? key }) : super(key: key);
 
@@ -62,7 +61,6 @@ class DriverTool extends StatelessWidget {
                   ])
                 
                   ),
-          bottomNavigationBar: BottomNavigation(),
         ),
       ),
     );

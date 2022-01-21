@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
+import 'package:mobile_traffic/screens/signup/login.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/driver/accident_form.dart';
+import 'package:mobile_traffic/services/shared_services.dart';
+import 'package:get/get.dart';
 
 class DriverHome extends StatelessWidget {
   // const DriverHome({ Key? key }) : super(key: key);
@@ -21,11 +24,24 @@ class DriverHome extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                  padding:EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   // color: Colors.red,
                   width: size.width,
                   height: 40,
-                  child: HeaderText("Driver"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      HeaderText("Driver"),
+                      IconButton(
+                        icon: Icon(Icons.more_horiz),
+                        onPressed: ()async {
+                          Get.to(Login());
+                       await   SharedService.logout(context);
+                          
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
@@ -98,7 +114,7 @@ class DriverHome extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: BottomNavigation()),
+      )     
     );
   }
 }
