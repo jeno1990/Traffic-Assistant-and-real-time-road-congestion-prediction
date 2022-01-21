@@ -4,20 +4,30 @@ import 'package:mobile_traffic/services/api_service.dart';
 
 class NotificationController extends GetxController {
   // ignore: deprecated_member_use
-  var notificationList = List<NotificationModel>.empty().obs;
+  var notificationList = List<NotificationModel>.empty(growable: true).obs;
+  var isLoading = true.obs;
   @override
   void onInit() {
-    print("hhhh"+notificationList.toString());
+    print("hhhh" + notificationList.toString());
+
     getNotification();
+    update();
     super.onInit();
   }
 
   void getNotification() async {
-    var notifications = await APIService.getNotification();
-    print(notifications);
+    try {
+      isLoading(true);
 
-    if (notifications != null) {
-      notificationList.value = notifications;
+      var notifications = await APIService.getNotification();
+      print(notifications);
+
+      if (notifications != null) {
+        notificationList.value = notifications;
+      }
+    } finally {
+      // TODO
+      isLoading(false);
     }
   }
 }

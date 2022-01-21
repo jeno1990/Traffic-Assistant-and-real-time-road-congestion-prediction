@@ -17,7 +17,11 @@ class DriverNotification extends StatelessWidget {
           children: [
             Expanded(child: Obx(() {
              // print(notifiCationController.notificationList.length);
-              return ListView.builder(
+           return  notificationController.isLoading.value?
+              Center(
+               child: CircularProgressIndicator(color: Colors.black,),
+             ):
+               ListView.builder(
                   itemCount: notificationController.notificationList.length,
                   itemBuilder: (_, index) {
                     return ExpansionTile(
@@ -37,39 +41,4 @@ class DriverNotification extends StatelessWidget {
         )
         );
   }
-}
-
-Widget LoadNotifications() {
-  return FutureBuilder(
-    future: APIService.getNotification(),
-    builder: (
-      BuildContext context,
-      AsyncSnapshot<List<NotificationModel>?> model,
-    ) {
-      if (model.hasData) {
-        print('kkkk');
-        return NotificationList(NotificationFromJson(model));
-      }
-
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    },
-  );
-}
-
-Widget NotificationList(List<NotificationModel> notifications) {
-  return ListView.builder(
-      shrinkWrap: true,
-      physics: const ClampingScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemCount: notifications.length,
-      itemBuilder: (context, index) {
-        return Row(
-          children: [
-            Text(notifications[index].accident_type.toString()),
-            Text(notifications[index].plate_number.toString())
-          ],
-        );
-      });
 }
