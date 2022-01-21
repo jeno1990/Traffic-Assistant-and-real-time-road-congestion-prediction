@@ -10,26 +10,31 @@ class DriverNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Notifications'),
-        // ),
-        // body: Expanded(child: Obx(() {
-        //   print(notifiCationController.notificationList.length);
-        //   return ListView.builder(
-        //       itemCount: notificationController.notificationList.length,
-        //       itemBuilder: (_, index) {
-        //         return ExpansionTile(
-        //             title: Text(notificationController
-        //                 .notificationList[index].accident_type
-        //                 .toString()),
-        //             children: [
-        //               Text("plate numver \$" +
-        //                   notificationController
-        //                       .notificationList[index].plate_number
-        //                       .toString())
-        //             ]);
-        //       });
-       // }))
+        appBar: AppBar(
+          title: Text('Notifications'),
+        ),
+        body: Column(
+          children: [
+            Expanded(child: Obx(() {
+             // print(notifiCationController.notificationList.length);
+              return ListView.builder(
+                  itemCount: notificationController.notificationList.length,
+                  itemBuilder: (_, index) {
+                    return ExpansionTile(
+                        title: Text(notificationController
+                            .notificationList[index].accident_type.toString()
+                            ),
+                        children: [
+                          
+                          Text("plate numver \$" +
+                              notificationController
+                                  .notificationList[index].plate_number
+                                  .toString())
+                        ]);
+                  });
+       })),
+          ],
+        )
         );
   }
 }

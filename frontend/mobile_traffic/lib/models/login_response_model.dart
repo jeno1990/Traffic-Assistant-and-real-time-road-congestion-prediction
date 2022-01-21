@@ -12,13 +12,13 @@ class LoginResponseModel {
   late final Data data;
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
+    message = json['msg'];
     data = Data.fromJson(json['data']);
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['message'] = message;
+    _data['msg'] = message;
     _data['data'] = data.toJson();
     return _data;
   }
@@ -42,7 +42,7 @@ class Data {
     
 
     email = json['email'];
-    date = json['date'];
+    //date = json['date'];
     id = json['id'];
     token = json['token'];
   }
@@ -52,7 +52,7 @@ class Data {
     
 
     _data['email'] = email;
-    _data['date'] = date;
+  //  _data['date'] = date;
     _data['id'] = id;
     _data['token'] = token;
     return _data;

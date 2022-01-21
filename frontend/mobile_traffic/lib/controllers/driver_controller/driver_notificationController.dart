@@ -7,12 +7,15 @@ class NotificationController extends GetxController {
   var notificationList = List<NotificationModel>.empty().obs;
   @override
   void onInit() {
+    print("hhhh"+notificationList.toString());
     getNotification();
     super.onInit();
   }
 
   void getNotification() async {
     var notifications = await APIService.getNotification();
+    print(notifications);
+
     if (notifications != null) {
       notificationList.value = notifications;
     }
