@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_traffic/models/signup_request_model.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:mobile_traffic/screens/driver/driver_home.dart';
 import 'package:get/get.dart';
-class Signup extends StatelessWidget {
-  // const ({ Key? key }) : super(key: key);
+import 'package:mobile_traffic/services/api_service.dart';
+
+class Signup extends StatefulWidget {
+  // const Signup({Key? key}) : super(key: key);
   // final _formKey = GlobalKey<FormState>();
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  bool isApiCallProcess = false;
+  bool hidePassword = true;
+  static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
+  final first_nameController = TextEditingController();
+  final last_nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phone_numberController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirm_passwordController = TextEditingController();
+  final addressController = TextEditingController();
+
+  RegisterRequestModel? signupModel;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +59,7 @@ class Signup extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(20),
               child: Form(
+                key: globalFormKey,
                 child: ListView(
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   // mainAxisAlignment: MainAxisAlignment.center,
@@ -45,21 +67,20 @@ class Signup extends StatelessWidget {
                     // The validator receives the text that the user has entered.
                     // SizedBox(height: 30,),
                     // Container(padding: EdgeInsets.fromLTRB(20, 30, 0, 0),child: Text("sign up",style: TextStyle(fontSize: 36,color: Colors.white),)),
-                    SizedBox(
-                      height: 20,
-                    ),
+
                     Container(
+                        padding: EdgeInsets.all(10),
                         alignment: Alignment.center,
                         child: HeaderText('Signup')),
-                    SizedBox(
-                      height: 30,
-                    ),
+
                     TextFormField(
+                      controller: first_nameController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "First name",
                           labelStyle: TextStyle(color: Colors.white)),
+
                       // The validator receives the text that the user has entered.
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -68,12 +89,15 @@ class Signup extends StatelessWidget {
                         return null;
                       },
                     ),
+
                     TextFormField(
+                      controller: last_nameController,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "Last name",
                           labelStyle: TextStyle(color: Colors.white)),
+
                       // The validator receives the text that the user has entered.
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -83,6 +107,53 @@ class Signup extends StatelessWidget {
                       },
                     ),
                     TextFormField(
+                      controller: emailController,
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: "email",
+                          labelStyle: TextStyle(color: Colors.white)),
+
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter email';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: phone_numberController,
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: "Phone number",
+                          labelStyle: TextStyle(color: Colors.white)),
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: addressController,
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: "address",
+                          labelStyle: TextStyle(color: Colors.white)),
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter address';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: passwordController,
                       obscureText: true,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
@@ -97,6 +168,7 @@ class Signup extends StatelessWidget {
                       },
                     ),
                     TextFormField(
+                      controller: confirm_passwordController,
                       obscureText: true,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
@@ -111,11 +183,22 @@ class Signup extends StatelessWidget {
                       },
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 10,
                     ),
-                    Button('submit', ()=> {
-                      Get.to(DriverHome())
+                    Button('submit', () async{
+                      RegisterRequestModel model = RegisterRequestModel(
+                          first_name: first_nameController.text,
+                          last_name: last_nameController.text,
+                          email: emailController.text,
+                          phone_number: phone_numberController.text,
+                          address: addressController.text,
+                          password: passwordController.text);
+
+                      print(passwordController.text);
+                      // Get.to(DriverHome()),
+                     await APIService.register(model);
                     }, Color.fromRGBO(0, 193, 31, 0.25)),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

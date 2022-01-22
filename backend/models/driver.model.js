@@ -18,6 +18,14 @@ const Driver = new schema(
             type:String,
             required:false
         },
+        phone_number:{
+            type:String,
+            // required: true
+        },
+        address:{
+            type:String,
+          //  required:false
+        },
         password:{
             type:String,
             required: true
