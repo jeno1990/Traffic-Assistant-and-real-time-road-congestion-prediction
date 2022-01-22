@@ -5,7 +5,7 @@ import 'package:mobile_traffic/services/api_service.dart';
 import 'package:get/get.dart';
 
 class Accident_Form extends StatefulWidget {
-  // const Accident_Form({Key? key}) : super(key: key);
+  const Accident_Form({Key? key}) : super(key: key);
 
   @override
   _Accident_FormState createState() => _Accident_FormState();

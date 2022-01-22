@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:mobile_traffic/services/api_service.dart';
 
 class Signup extends StatefulWidget {
-  // const Signup({Key? key}) : super(key: key);
+  const Signup({Key? key}) : super(key: key);
   // final _formKey = GlobalKey<FormState>();
   @override
   State<Signup> createState() => _SignupState();

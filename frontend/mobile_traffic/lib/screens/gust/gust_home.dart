@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
-import 'package:mobile_traffic/screens/driver/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 
 class GustHome extends StatefulWidget {
@@ -67,7 +66,7 @@ class _GustHomeState extends State<GustHome> {
                           )),
                     ),
                   ])),
-          bottomNavigationBar: BottomNavigation(),
+        //  bottomNavigationBar: BottomNavigation(),
         ),
       ),
     );

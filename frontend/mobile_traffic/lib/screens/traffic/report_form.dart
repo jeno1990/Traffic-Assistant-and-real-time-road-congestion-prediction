@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
+//import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 
@@ -79,79 +79,81 @@ class Report_form extends StatelessWidget {
                        decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)),
-                          child: DropDownFormField(
+                      child:Text("hee"),
+                          // child: DropDownFormField(
                             
-                            titleText: 'Violation type',
-                            // value: _violation,
-                            // onSaved: (value) {
-                            //   setState(() {
-                            //     _violation = value;
-                            //   });
-                            // },
-                            // onChanged: (value) {
-                            //   setState(() {
-                            //     _violation = value;
-                            //   });
-                            // },
-                            dataSource: [
-                              {
-                                "display": "Over Speed",
-                                "value": "Over Speed",
-                              },
-                              {
-                                "display": "With out driving licence",
-                                "value": "With out driving licence",
-                              },
-                              {
-                                "display": "Ilegal driving",
-                                "value": "Ilegal driving",
-                              },
-                              {
-                                "display": "Over Specified Triff",
-                                "value": "Over Specified Tariff",
-                              },
-                              {
-                                "display": "Vehicle is not ready for driving",
-                                "value": "Vehicle is not ready for driving",
-                              },
-                            ],
-                            textField: 'display',
-                            valueField: 'value',
-                          ),
+                          //   titleText: 'Violation type',
+                          //   // value: _violation,
+                          //   // onSaved: (value) {
+                          //   //   setState(() {
+                          //   //     _violation = value;
+                          //   //   });
+                          //   // },
+                          //   // onChanged: (value) {
+                          //   //   setState(() {
+                          //   //     _violation = value;
+                          //   //   });
+                          //   // },
+                          //   dataSource: [
+                          //     {
+                          //       "display": "Over Speed",
+                          //       "value": "Over Speed",
+                          //     },
+                          //     {
+                          //       "display": "With out driving licence",
+                          //       "value": "With out driving licence",
+                          //     },
+                          //     {
+                          //       "display": "Ilegal driving",
+                          //       "value": "Ilegal driving",
+                          //     },
+                          //     {
+                          //       "display": "Over Specified Triff",
+                          //       "value": "Over Specified Tariff",
+                          //     },
+                          //     {
+                          //       "display": "Vehicle is not ready for driving",
+                          //       "value": "Vehicle is not ready for driving",
+                          //     },
+                          //   ],
+                          //   textField: 'display',
+                          //   valueField: 'value',
+                          // ),
                         ),
                       
                       Container(
                         padding: EdgeInsets.only(top: 5),
-                        child: DropDownFormField(
-                          titleText: 'Action Taken',
-                          // value: _actionTaken,
-                          // onSaved: (value) {
-                          //   setState(() {
-                          //     _actionTaken = value;
-                          //   });
-                          // },
-                          // onChanged: (value) {
-                          //   setState(() {
-                          //     _actionTaken = value;
-                          //   });
+                        child: Text(''),
+                        // DropDownFormField(
+                        //   titleText: 'Action Taken',
+                        //   // value: _actionTaken,
+                        //   // onSaved: (value) {
+                        //   //   setState(() {
+                        //   //     _actionTaken = value;
+                        //   //   });
+                        //   // },
+                        //   // onChanged: (value) {
+                        //   //   setState(() {
+                        //   //     _actionTaken = value;
+                        //   //   });
                          
-                          dataSource: [
-                            {
-                              "display": "Suspend Driving Licence",
-                              "value": "Suspend Driving Licence",
-                            },
-                            {
-                              "display": "Removing Vehicle plate",
-                              "value": "Removing Vehicle plate",
-                            },
-                            {
-                              "display": "Removing Vehicle Bollo",
-                              "value": "Removing Vehicle Bollo",
-                            },
-                          ],
-                          textField: 'display',
-                          valueField: 'value',
-                        ),
+                        //   dataSource: [
+                        //     {
+                        //       "display": "Suspend Driving Licence",
+                        //       "value": "Suspend Driving Licence",
+                        //     },
+                        //     {
+                        //       "display": "Removing Vehicle plate",
+                        //       "value": "Removing Vehicle plate",
+                        //     },
+                        //     {
+                        //       "display": "Removing Vehicle Bollo",
+                        //       "value": "Removing Vehicle Bollo",
+                        //     },
+                        //   ],
+                        //   textField: 'display',
+                        //   valueField: 'value',
+                        // ),
                       ),
                       TextFormField(
                         decoration: InputDecoration(
