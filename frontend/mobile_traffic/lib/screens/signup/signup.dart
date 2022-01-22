@@ -186,6 +186,7 @@ class _SignupState extends State<Signup> {
                       height: 10,
                     ),
                     Button('submit', () async{
+                      
                       RegisterRequestModel model = RegisterRequestModel(
                           first_name: first_nameController.text,
                           last_name: last_nameController.text,
@@ -193,12 +194,33 @@ class _SignupState extends State<Signup> {
                           phone_number: phone_numberController.text,
                           address: addressController.text,
                           password: passwordController.text);
-
+                      if(first_nameController.text==""||last_nameController.text==""||emailController.text==""||addressController.text==""||passwordController.text==""||phone_numberController.text==""){
+                        Get.snackbar("error","all fields should be filled",
+                              backgroundColor: Colors.red[200],
+                              duration: Duration(seconds:3),
+                              snackPosition: SnackPosition.TOP,
+                              isDismissible: true,
+                              snackStyle: SnackStyle.FLOATING);
+                      }else{
                       print(passwordController.text);
                       // Get.to(DriverHome()),
+                      try{
+                         showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Center(child: CircularProgressIndicator(),);
+                                });
                      await APIService.register(model);
+                      }catch(err){
+                         Get.snackbar("Network error", "try again",
+                              // backgroundColor: Colors.redAccent[100],
+                              duration: Duration(seconds:5),
+                              snackPosition: SnackPosition.TOP,
+                              );
+                      }
+                      }
                     }, Color.fromRGBO(0, 193, 31, 0.25)),
-
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
