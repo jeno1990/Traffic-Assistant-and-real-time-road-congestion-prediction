@@ -10,14 +10,15 @@ class LocationController extends GetxController{
 
       late bool _serviceEnabled;
       late PermissionStatus _permissionGranted;
-      Rx<LocationData> _locationData  = new LocationData.fromMap({}).obs;
+      Rx<LocationData> _locationData  = new LocationData.fromMap({"latitude":-1.0,"longitude":-1.0}).obs;
 
       LocationData getLocationData(){
         return _locationData.value;
-
       }
       
       Future<void> updateLocation() async{
+
+        try{
         bool _serviceEnabled = await location.serviceEnabled();
         
           if (!_serviceEnabled) {
@@ -36,6 +37,9 @@ class LocationController extends GetxController{
         }
 
           _locationData.value = await location.getLocation();
+        }catch(err){
+          //catch block
+        }
           print("location data is  : ${_locationData.value} ");
       }
 }

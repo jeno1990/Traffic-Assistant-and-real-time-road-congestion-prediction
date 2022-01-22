@@ -10,7 +10,6 @@ class OSMap extends StatefulWidget {
   final double lat;
   final double lon;
   OSMap(this.lat,this.lon);
-  
   @override
   _OSMapState createState() => _OSMapState();
 }

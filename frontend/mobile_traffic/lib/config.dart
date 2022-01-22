@@ -1,7 +1,7 @@
 class Config {
   static const String appName = 'mobile_traffic';
   //aait library ip :10.5.217.74
-  static const String apiURL = "10.5.217.74:5000";
+  static const String apiURL = "10.5.231.27:5000";
   static const String trafficIssuedAPI= "/api/traffic/issued_cases";
   static const String DriverLoginAPI = "/api/driver/driver_login";
   static const String DriverSignupAPI = "/api/driver/driver_signup";
