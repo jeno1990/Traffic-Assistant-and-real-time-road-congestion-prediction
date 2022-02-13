@@ -120,7 +120,7 @@ class DriverHome extends StatelessWidget {
                                   Marker(
                                     width: 80.0,
                                     height: 80.0,
-                                    point: LatLng(location_controller.getLocationData().latitude as double,location_controller.getLocationData().longitude as double),
+                                    point: LatLng((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double),
                                     builder: (ctx) =>Icon(
                                       Icons.location_on,
                                       color: Colors.red,
@@ -135,7 +135,7 @@ class DriverHome extends StatelessWidget {
                           top:10,
                           child: GestureDetector(
                             onTap: (){
-                              Get.to(OSMap(location_controller.getLocationData().latitude as double , location_controller.getLocationData().longitude as double));
+                              Get.to(OSMap((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double));
                               },
                             child: Icon(Icons.explore_rounded,size: 35,)))
                         ]), //the first tab
