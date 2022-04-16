@@ -2,7 +2,7 @@ var bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 const {DriverById} = require('../config/driver')
 const Driver = require("../models/driver.model");
-
+require("../models/report_accident.model");
 // Get Users model which we have created 
 
 

@@ -10,7 +10,7 @@ const router = express.Router();
 //driver routes
 router.post("/driver/driver_signup",driver.driver_signup);
 router.post("/driver/driver_login",driver.driver_login);
-router.post("/driver/accident_form",auth,driver.accident_report);
+router.post("/driver/accident_form",driver.accident_report);
 
 router.get("/driver/driver_by_id/:driver_id",auth,driver.findDriverById)
 
