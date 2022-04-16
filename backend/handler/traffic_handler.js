@@ -141,7 +141,7 @@ Report_accident.find().select(' accident_type plate_number ').exec(
     
       
 }
-const traffic_report_form=function (req,res) {
+const traffic_report_form = function (req,res) {
  
     console.log('inside the traffic_report_form');
 

@@ -1,4 +1,5 @@
 const mongoose =require('mongoose');
+const { schema } = require('./driver.model');
 //traffic form schema
 const Traffic_form= new mongoose.Schema(
     {
@@ -28,7 +29,7 @@ const Traffic_form= new mongoose.Schema(
                    
                 },
 
-    }
+    },{timestamps:true}
 );
 
 
