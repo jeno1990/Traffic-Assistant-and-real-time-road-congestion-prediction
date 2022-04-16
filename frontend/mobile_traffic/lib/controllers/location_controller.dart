@@ -10,7 +10,7 @@ class LocationController extends GetxController{
 
       late bool _serviceEnabled;
       late PermissionStatus _permissionGranted;
-      Rx<LocationData> _locationData  = new LocationData.fromMap({"latitude":-1.0,"longitude":-1.0}).obs;
+      Rx<LocationData> _locationData  = new LocationData.fromMap({}).obs;
 
       LocationData getLocationData(){
         return _locationData.value;
