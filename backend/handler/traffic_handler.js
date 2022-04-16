@@ -1,5 +1,7 @@
 var bcrypt = require("bcryptjs");
 const Traffic =require("../models/traffic.model");
+const Reported_accident =require("../models/report_accident.model");
+
 
 
 
@@ -116,13 +118,13 @@ const traffic_signup=function(req, res) {
   }
   const issued_cases=function (req,res) {
     //
-Report_accident.find().select(' accident_type plate_number ').exec(
+    Reported_accident.find().select(' accident_type plate_number ').exec(
   (err,alart)=>{
     if(err){
       res.send("error"+err)
     }
     else{
-      res.send(alart)
+      res.json(alart)
     }
   }
 )    
