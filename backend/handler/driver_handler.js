@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { DriverById } = require("../config/driver");
 const Driver = require("../models/driver.model");
 
-// Get Users model which we have created
+require("../models/report_accident.model");
 
 const driver_signup = function (req, res) {
   console.log("inside the drver_signup");
