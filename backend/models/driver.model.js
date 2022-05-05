@@ -34,6 +34,19 @@ const Driver = new schema(
         token: { 
             type: String 
         },
+        role: {
+            type:String
+        },
+        isActive: {
+            type: Boolean,
+            default : false
+        },
+        gender : {
+            type: String 
+        },
+        profile_picture: {
+            type: String
+        }
 
     },{timestamps:true}
 );
