@@ -1,63 +1,20 @@
 require("dotenv").config();
-const express =require('express');
-const mongoose  = require('./config/mongoDB.js');
-const Route = require('./routes/route');
-var FromHardware=require('./models/arduino.model')
+const express = require("express");
+const app = express();
+const server = require("http").createServer(app);
+global.io = require("socket.io")(server, { cors: { origin: "*" } });
 
+const mongoose = require("./config/mongoDB.js");
+const Route = require("./routes/route");
+const connect = require("./handler/socket/traffic_socket")(io);
 
-const port =process.env.API_PORT || 5000;
-const app=express();
+const port = process.env.API_PORT || 5000;
 
 app.use(express.json());
-var SerialPort = require('serialport');
-const parsers = SerialPort.parsers;
-
-const parser = new parsers.Readline({
-  delimiter: '\r\n'
-});
-console.log('data');
-
-
-var porter = new SerialPort('COM2',{ 
-  baudRate: 9600,
-  dataBits: 8,
-  parity: 'none',
-  stopBits: 1,
-  flowControl: false
-});
-
-porter.pipe(parser);
-parser.on('data',function (data) {
-  var jsons=JSON.parse(data);
-  console.log(jsons);
-  var hardware = new FromHardware({
-    latitude: jsons.latitude,
-    longtude: jsons.longtude,
-    speed: jsons.speed,
-  });
-
-  hardware.save().then(()=>{
-      console.log('hardware saved');
-    //  res.status(200).json('hardware saved successful');
-  } ).catch(
-      (err)=>{
-          console.log('error');
-     //     res.status(403).json(err);
-      }
-  );
-  //console.log(jsons)
-  //arduino(jsons);
-  
-});
-
 
 const connection = mongoose.connection;
+connection.once("open", () => console.log("mongodb connected"));
 
-connection.once("open",()=>console.log('mongodb connected'));
+app.use("/api", Route);
 
-
-app.use("/api",Route);
-
-// app.route("/").get((req,res)=>res.json('Home page'));
-
-app.listen(port,()=>console.log(`your server is running in port ${port}`));
+server.listen(port, () => console.log(`Server is running in port ${port}`));

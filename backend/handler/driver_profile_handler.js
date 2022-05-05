@@ -2,7 +2,7 @@ var bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { DriverById } = require("../config/driver");
 const Driver = require("../models/driver.model");
-
+const nodemailer = require("nodemailer");
 require("../models/report_accident.model");
 
 const driver_signup = function (req, res) {
@@ -88,19 +88,18 @@ const driver_login = function (req, res) {
     Driver.findOne({ email: email }, (err, driver) => {
       if (err) {
         res.status(500);
-        // res.json({ status: 0, message: err });
       }
       // if the email is not found , respond user that this email is not found
       if (!driver) {
         res.status(401);
         res.json({
-          msg: " user with this email did not found",
+          msg: " email not registerd",
         });
       } else {
         //if email found hash the password for the comparision as our system have hashed password
         bcrypt.compare(password, driver.password, (err, isMatch) => {
           const token = jwt.sign({ driver }, process.env.TOKEN_KEY, {
-            expiresIn: "15",
+            // expiresIn: "15hr",
           });
           driver.token = token;
           if (err) {
@@ -111,7 +110,7 @@ const driver_login = function (req, res) {
               res.status(401);
               res.json({
                 data: isMatch,
-                msg: "invalid user, credentials doesn't match",
+                msg: "invalid user! User credentials doesn't match",
               });
             } else {
               // if email and password match , respond that to user
@@ -133,57 +132,81 @@ const driver_login = function (req, res) {
     });
   }
 };
-const accident_report = function (req, res) {
-  console.log("inside the driver_report_form");
 
-  let { accident_type, plate_number } = req.body;
-
-  if (accident_type === "" || plate_number === "") {
-    res.json({ status: 0, data: "error", msg: " Enter all fields!!!" });
-  } else {
-    Report_accident({
-      //s  driver_id:req.params.id,
-      accident_type: accident_type,
-      plate_number: plate_number,
-    });
-  }
-};
-
-const findDriverById = function (req, res) {
-  let driver_id = req.params.driver_id;
-  console.log(driver_id);
-  if (driver_id === "") {
+const change_password = function (req, res) {
+  const { oldPassword, newPassword } = req.body;
+  if (oldPassword === "" || newPassword === "") {
     res.status(400);
-    res.json({ msg: "driver_id field required" });
+    res.json({ msg: "all fields should be field" });
+  }
+  if (newPassword.length < 4) {
+    res.status(400);
+    res.json({ status: 400, msg: "password length should is short" });
+    
   } else {
-    Driver.findOne({ _id: driver_id }, (err, driver) => {
-      console.log(driver);
-      if (err) {
-        res.status(500);
-        res.json({ msg: "internal server error" });
-      } else {
-        if (!driver) {
-          res.status(401);
-          res.json({ msg: "driver not found" });
-        } else {
-          res.status(200);
+    //then do an update
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(newPassword, salt, function (err, hash) {
+        if (err) {
           res.json({
-            data: {
-              id: driver.id,
-              first_name: driver.first_name,
-              last_name: driver.last_name,
-              email: driver.email,
-            },
+            status: 0,
+            data: err,
+            msg: " error while hashing password",
           });
         }
-      }
+        const newvalues = { $set: { password: hash } };
+        Driver.updateOne(
+          { _id: req.user.driver._id },
+          newvalues,
+          function (err, res) {
+            if (err) {
+              console.log(err);
+              res.json({ status: 500, msg: "internal server error" });
+            }
+            console.log("1 document updated ", res);
+            res.json({
+              status: 200,
+              msg: "successfully updtated password",
+              data: newPassword,
+            });
+          }
+        );
+      });
     });
   }
+  
+};
+
+const sendEmail = function (req, res) {
+  const output = `<p>test message from node server</p> `;
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nigatupaulos@gmail.com",
+      pass: "nigatu4365",
+    },
+  });
+
+  let message = {
+    from: "nigatupaulos@gmail.com",
+    to: "nigatujeno@gmail.com",
+    subject: "test nodemailer",
+    html: output,
+  };
+
+  transporter.sendMail(message, function (err, info) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(info);
+    }
+  });
+  res.json({ msg: "driver not found" });
 };
 
 module.exports = {
   driver_signup,
   driver_login,
-  findDriverById,
-  accident_report,
+  change_password,
+  sendEmail,
 };
