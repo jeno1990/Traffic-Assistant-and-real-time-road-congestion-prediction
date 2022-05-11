@@ -1,34 +1,32 @@
 var bcrypt = require("bcryptjs");
 const Traffic =require("../models/traffic.model");
 const Reported_accident =require("../models/report_accident.model");
-
+// const sendMail = require('../helpers/sendEmail')
 
 
 
 
 const traffic_signup=function(req, res) {
     console.log('inside the drver_signup');
-
  
     let {first_name,last_name,email,password} = req.body;
-    if (first_name === "" || email === "" || password === "" ) {
+    if (first_name === "" || email === "") {
       res.json({ status: 0, data: "error", msg: " Enter all fields" });
     } else {
-      //if all the data is provided, it checks that email provides is alredy used or not in our system
       Traffic.findOne({ email: email }, function(err, traffic) {
         if (err) console.log(err);
 
         if (traffic) {
-          //if used, return thi message
           res.json({ code:403 ,status: 0, data: traffic.email, msg: " Driver already exists" });
         } else {
-          //if not used, create a new obnect od our user schema and store it in it
+          let pass = Math.floor(100000 + Math.random() * 900000); //6 digit random number
           var traffic = new Traffic({
             first_name: first_name,
             last_name : last_name,
             email: email,
-            password: password,
+            password: `${pass}`,//just to test node mailer (to be generated)
           });
+          console.log("password--> "+traffic.password)
           bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(traffic.password, salt, function(err, hash) {
               if (err) {
@@ -46,8 +44,17 @@ const traffic_signup=function(req, res) {
                   //if error send that to user
                   res.json({code:500, status: 0, data: err, msg: "internale server error" });
                 } else {
+                  
+                  try {
+                    //----------------- TRY TO MAKE IT ONLY SAVE USER INFORMATION IF PASSWORD IS DELIVERD----->
+                    //this will send password with provided email address
+                    require('../helpers/sendEmail')(traffic.email,traffic.password);
+                  } catch (error) {
+                    console.log(error)
+                  } 
+
                   //Send response to the user that registration process is complete
-                res.json({
+                  res.json({
                     status: 1,
                     data: traffic,
                     msg: `Thank You for registering.`
