@@ -9,7 +9,9 @@ const Route = require("./routes/route");
 const connect = require("./handler/socket/traffic_socket")(io);
 
 const port = process.env.API_PORT || 5000;
-
+app.get("/test",(req,res)=>{
+    res.json({msg:"Home Page "})
+})
 app.use(express.json());
 
 const connection = mongoose.connection;
