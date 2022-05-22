@@ -1,9 +1,13 @@
 const express= require('express');
-
+// const fetch= require("node-fetch");
+// mod.cjs
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const API_KEY="8UHT67ITOFDGRDHG";
 const auth = require("../middlewares/auth");
 const driver = require('../handler/driver_handler');
 const traffic =  require('../handler/traffic_handler');
 const gust =require('../handler/gust_handler');
+const { thingspeak_handler } = require('../handler/thingspeak_handler');
 const router = express.Router();
 
 
@@ -26,10 +30,8 @@ router.post("/traffic/report_form",traffic.traffic_report_form);
 
 router.post("/gust/gust_form",gust.gust_form);
 
-//office routes
+//thingspeak route
+router.get("/thingspeak",thingspeak_handler)
 
 
-
-
-  
   module.exports = router;

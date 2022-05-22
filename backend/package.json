@@ -17,8 +17,9 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.6",
-    "nodemon": "^2.0.15",
-    "socket.io": "^2.0.4",
-    "serialport": "^9.2.8"
+    "node-fetch": "^3.2.4",
+    "nodemon": "^2.6.6",
+    "serialport": "^9.2.8",
+    "socket.io": "^4.5.1"
   }
 }
