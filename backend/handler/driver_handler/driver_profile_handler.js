@@ -1,9 +1,9 @@
 var bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { DriverById } = require("../config/driver");
-const Driver = require("../models/driver.model");
+// const { DriverById } = require("../../config/driver");
+const Driver = require("../../models/driver.model");
 const nodemailer = require("nodemailer");
-require("../models/report_accident.model");
+require("../../models/report_accident.model");
 
 const driver_signup = function (req, res) {
   console.log("inside the drver_signup");
@@ -60,7 +60,7 @@ const driver_signup = function (req, res) {
               //user.save().then().catch() you can use promise like this also
               if (err) {
                 //if error send that to user
-                res.json({ status: 0, data: err, msg: " error" });
+                res.status(500).json({ data: err, msg: " internal server error" });
               } else {
                 //Send response to the user that registration process is complete
                 res.status(201);
@@ -88,6 +88,7 @@ const driver_login = function (req, res) {
     Driver.findOne({ email: email }, (err, driver) => {
       if (err) {
         res.status(500);
+        return;
       }
       // if the email is not found , respond user that this email is not found
       if (!driver) {
@@ -142,7 +143,6 @@ const change_password = function (req, res) {
   if (newPassword.length < 4) {
     res.status(400);
     res.json({ status: 400, msg: "password length should is short" });
-    
   } else {
     //then do an update
     bcrypt.genSalt(10, function (err, salt) {
@@ -174,7 +174,6 @@ const change_password = function (req, res) {
       });
     });
   }
-  
 };
 
 const sendEmail = function (req, res) {

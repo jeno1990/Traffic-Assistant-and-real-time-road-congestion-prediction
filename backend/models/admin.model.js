@@ -2,9 +2,8 @@ const mongoose =require('mongoose');
 const schema = mongoose.Schema;
 
 
-const Traffic = new schema(
+const Admin = new schema(
     {
-       
         email:{
             type:String,
             required:true,
@@ -23,17 +22,16 @@ const Traffic = new schema(
             type:String,
             required: true
         },
-        // isActive: {
-        //     type: Boolean,
-        //     default: false
-        // },
         location:{
             latitude: {type:Number},
             longitude: {type:Number}
         },
         role: {
             type:String , 
-            default:"traffic",
+            required :true,
+        },
+        token: { 
+            type: String 
         }
 
     },{timestamps:true}
@@ -41,4 +39,4 @@ const Traffic = new schema(
 
 // const Driver = mongoose.model( "Driver", Driver );
 
-module.exports = mongoose.model( "Traffic", Traffic );
+module.exports = mongoose.model( "Admin", Admin );

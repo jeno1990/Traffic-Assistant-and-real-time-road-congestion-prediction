@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const config = process.env;
 
-const verifyToken = (req, res, next) => {
+const authenticate = (req, res, next) => {
   // const token = req.body.token || req.query.token || req.headers["Authorization"];
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
@@ -22,5 +22,15 @@ const verifyToken = (req, res, next) => {
   // req.token=bearerToken;
   return next();
 };
-
-module.exports = verifyToken;
+//before authorization is called there must be authentication because role is taken from the token
+const Authorize = (Permission) => {
+  return (req, res, next) => {
+    const Role = req.user.admin.role; //this is from the token
+    if (Permission.includes(Role)) {
+      next();
+    } else {
+      res.status(401).json({ msg: "unauthorized user" });
+    }
+  };
+};
+module.exports = { authenticate, Authorize };

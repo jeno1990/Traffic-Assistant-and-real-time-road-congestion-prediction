@@ -35,7 +35,8 @@ const Driver = new schema(
             type: String 
         },
         role: {
-            type:String
+            type:String,
+            default:"driver"
         },
         isActive: {
             type: Boolean,

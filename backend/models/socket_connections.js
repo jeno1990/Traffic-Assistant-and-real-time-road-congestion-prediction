@@ -18,3 +18,4 @@ const Connections = mongoose.Schema({
 module.exports=mongoose.model("connections",Connections)
 
 //we might not need to use database to check for online traffics instade we can use window variable 
+//never been used before
