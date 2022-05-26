@@ -100,7 +100,7 @@ class APIService {
   }
 
   static Future<List<NotificationModel>?> getNotification() async {
-    var url = Uri.http(Config.apiURL, Config.trafficIssuedAPI);
+    var url = Uri.http(Config.apiURL, Config.trafficReportedAPI);
     http.Response response = await client.get(url, headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*"

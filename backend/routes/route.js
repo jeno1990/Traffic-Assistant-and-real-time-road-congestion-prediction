@@ -1,4 +1,10 @@
-const express = require("express");
+const express= require('express');
+// const fetch= require("node-fetch");
+// mod.cjs
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+// const API_KEY="8UHT67ITOFDGRDHG";
+// const { thingspeak_handler } = require('../handler/thingspeak_handler');
+
 
 const middlewares = require("../middlewares/auth");
 const driver_profile = require("../handler/driver_handler/driver_profile_handler");
@@ -63,5 +69,11 @@ router.post("/device/new_location", device.add_location); //takes input lat and 
 router.post("/admin/admin_login", admin.admin_login);
 
 //gust routes
-router.post("/gust/gust_form", gust.gust_form);
-module.exports = router;
+
+router.post("/gust/gust_form",gust.gust_form);
+
+//thingspeak route
+// router.get("/thingspeak",thingspeak_handler)
+
+
+  module.exports = router;
