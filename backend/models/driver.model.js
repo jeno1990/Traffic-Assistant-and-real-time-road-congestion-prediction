@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs/dist/bcrypt');
 const mongoose =require('mongoose');
 const schema = mongoose.Schema;
 
@@ -33,10 +34,28 @@ const Driver = new schema(
         token: { 
             type: String 
         },
+        role: {
+            type:String,
+            default:"driver"
+        },
+        isActive: {
+            type: Boolean,
+            default : false
+        },
+        gender : {
+            type: String 
+        },
+        profile_picture: {
+            type: String
+        }
 
     },{timestamps:true}
 );
 
-// const Driver = mongoose.model( "Driver", Driver );
-
+Driver.methods.hashPassword = function(password){
+    return bcrypt.hashSync(password,bcrypt.genSaltSync(10));
+}
+Driver.methods.comparePassword = function(passowrd,hash){
+    return bcrypt.compareSync(passowrd,hash);
+}
 module.exports = mongoose.model( "Driver", Driver );

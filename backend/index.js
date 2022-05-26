@@ -1,62 +1,25 @@
 require("dotenv").config();
-const express =require('express');
-const mongoose  = require('./config/mongoDB.js');
-const Route = require('./routes/route');
-var FromHardware=require('./models/arduino.model');
-const router = require("./routes/route");
-var bodyParser = require('body-parser')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const API_KEY="8UHT67ITOFDGRDHG";
+const express = require("express");
+const app = express();
+const server = require("http").createServer(app);
+global.io = require("socket.io")(server, { cors: { origin: "*" } });
 
-const port =process.env.API_PORT || 5000;
-const app=express();
+const mongoose = require("./config/mongoDB.js");
+const Route = require("./routes/route");
+const connect = require("./handler/socket/traffic_socket")(io);
+const add_admin = require("./init/insertAdmin");
+
+const port = process.env.API_PORT || 5000;
+
+app.get("/test", (req, res) => {
+  res.json({ msg: "Home Page " });
+});
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
-var SerialPort = require('serialport');
-const parsers = SerialPort.parsers;
 
-const parser = new parsers.Readline({
-  delimiter: '\r\n'
-});
-console.log('data');
-
-
-var porter = new SerialPort('COM2',{ 
-  baudRate: 9600,
-  dataBits: 8,
-  parity: 'none',
-  stopBits: 1,
-  flowControl: false
-});
-
-porter.pipe(parser);
-parser.on('data',function (data) {
-  var jsons=JSON.parse(data);
-  console.log(jsons);
-  var hardware = new FromHardware({
-    latitude: jsons.latitude,
-    longtude: jsons.longtude,
-    speed: jsons.speed,
-  });
-
-  hardware.save().then(()=>{
-      console.log('hardware saved');
-    //  res.status(200).json('hardware saved successful');
-  } ).catch(
-      (err)=>{
-          console.log('error');
-     //     res.status(403).json(err);
-      }
-  );
-  //console.log(jsons)
-  //arduino(jsons);
-  
-});
-
+app.get("/",(req , res)=>{res.send("home page")});
 
 const connection = mongoose.connection;
+connection.once("open", () => console.log("mongodb ping test seccussfull!"));
 
 connection.once("open",()=>console.log('mongodb connected'));
 
@@ -92,6 +55,7 @@ setInterval( async ()=>{
 
 app.use("/api",Route);
 
-// app.route("/").get((req,res)=>res.json('Home page'));
+//to add admin on start
+add_admin();
 
-app.listen(port,()=>console.log(`your server is running in port ${port}`));
+server.listen(port, () => console.log(`Server is running in port ${port}`));

@@ -12,7 +12,7 @@ const Traffic = new schema(
         },
         first_name:{
             type:String,
-            // required: true
+            required: true
         },
         last_name:{
             type:String,
@@ -23,13 +23,17 @@ const Traffic = new schema(
             type:String,
             required: true
         },
-        isActive: {
-            type: Boolean,
-            default: false
-        },
+        // isActive: {
+        //     type: Boolean,
+        //     default: false
+        // },
         location:{
             latitude: {type:Number},
             longitude: {type:Number}
+        },
+        role: {
+            type:String , 
+            default:"traffic",
         }
 
     },{timestamps:true}

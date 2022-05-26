@@ -9,9 +9,4 @@ class Config {
   static const String DriverHomeAPI = "/api/driver/home";
   static const String DriverAccidentFormAPI = "/api/driver/accident_form";
 
-
-
-
-
-
 }

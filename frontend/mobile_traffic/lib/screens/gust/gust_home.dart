@@ -29,7 +29,7 @@ class _GustHomeState extends State<GustHome> {
                   children: [
                     Container(
                         padding: EdgeInsets.all(20),
-                        child: HeaderText("Driver")),
+                        child: HeaderText("Gust")),
                     SizedBox(
                       height: 10,
                     ),

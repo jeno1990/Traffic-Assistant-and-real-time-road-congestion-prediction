@@ -84,25 +84,45 @@ class _LoginState extends State<Login> {
                         LoginRequestModel model = LoginRequestModel(
                             email: emailController.text,
                             password: passwordController.text);
-                        await APIService.login(model);
-                        print('login');
-                        APIService.login(model).then((response) {
-                          setState(() {
-                            // isApiCallProcess = false;
+                          if(emailController.text==""||passwordController.text==""){
+                           //this code will be changed to make the error report belo w the form field
+                            Get.snackbar( 
+                                "error", "Both fields must be filled",
+                                duration: Duration(seconds: 5),
+                                snackPosition: SnackPosition.TOP);
+                          }else{
+                            try{
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Center(child: CircularProgressIndicator(),);
+                                });
+                            await APIService.login(model);
+                            print('loged in');
+                            APIService.login(model).then((response) {
+                              setState(() {
+                                // isApiCallProcess = false;
+                              });
+                            
+                            if (response) {
+                              Get.toNamed('/driver_home');
+                            } else {
+                              Get.snackbar(
+                                  "errors", "Invalid Username/password!!",
+                                  duration: Duration(seconds: 10),
+                                  snackPosition: SnackPosition.BOTTOM);
+                            }
                           });
-
-                          if (response) {
-                            Get.toNamed('/driver_home');
-                          } else {
-                            Get.snackbar(
-                                "errors", "Invalid Username/password!!",
-                                duration: Duration(seconds: 10),
-                                snackPosition: SnackPosition.BOTTOM);
+                            }catch(err){
+                               Get.snackbar( 
+                                "error", "you are not connected to the internet",
+                                duration: Duration(seconds: 5),
+                                snackPosition: SnackPosition.TOP);
+                            }
                           }
-                        });
                         //Get.to(Violations())
                       }, Color.fromRGBO(72, 131, 246, 1)),
-                      Button('SignIn', () => {Get.to(Signup())},
+                      Button('Signup', () => {Get.to(Signup())},
                           Color.fromRGBO(0, 193, 31, 0.25)),
                     ]))),
             Row(
