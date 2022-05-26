@@ -31,7 +31,7 @@ router.post("/traffic/report_form",traffic.traffic_report_form);
 router.post("/gust/gust_form",gust.gust_form);
 
 //thingspeak route
-router.get("/thingspeak",thingspeak_handler)
+// router.get("/thingspeak",thingspeak_handler)
 
 
   module.exports = router;

@@ -4,6 +4,8 @@ import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:get/get.dart';
 import 'package:mobile_traffic/screens/gust/gust_home.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
+import 'package:mobile_traffic/screens/signup/loginAsTraffic.dart';
+import 'package:mobile_traffic/screens/traffic/violations.dart';
 
 
 class Welcome extends StatelessWidget {
@@ -28,17 +30,22 @@ class Welcome extends StatelessWidget {
       ),
       Container(
         padding: EdgeInsets.all(50),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+       // mainAxisAlignment: MainAxisAlignment.center,
+         children: [
           HeaderText("Welcome"),
+          SizedBox(
+            height:90
+          ),
+          // Button('Office', () => {},
+          //     Color.fromRGBO(31, 36, 158, 0.42)),
+          Button('Login as Car Owner', () => {Get.to(Login())}
+          , Color.fromRGBO(31, 36, 158, 0.42)),
           
-          Button('Office', () => {},
-              Color.fromRGBO(31, 36, 158, 0.42)),
-          Button('Car Owner', () => {Get.to(Login())}
+          Button('Login as Traffic Police', () => {Get.to(LoginAsTraffic())}
           , Color.fromRGBO(31, 36, 158, 0.42)),
-          Button('Traffic Police', () => {}
-          , Color.fromRGBO(31, 36, 158, 0.42)),
-          Button('As Gust', () => {Get.to(GustHome())}
-          , Color.fromRGBO(31, 36, 158, 0.42)),
+          // Button('As Gust', () => {Get.to(GustHome())}
+          // , Color.fromRGBO(31, 36, 158, 0.42)),
         ]),
       )
     ])));

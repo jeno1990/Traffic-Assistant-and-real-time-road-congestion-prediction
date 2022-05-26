@@ -193,6 +193,10 @@ class _SignupState extends State<Signup> {
                           phone_number: phone_numberController.text,
                           address: addressController.text,
                           password: passwordController.text);
+                           Get.snackbar(
+                                "Success", "Registered successfully!",
+                                duration: Duration(seconds: 10),
+                                snackPosition: SnackPosition.BOTTOM);
 
                       print(passwordController.text);
                       // Get.to(DriverHome()),
