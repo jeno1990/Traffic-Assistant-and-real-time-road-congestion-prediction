@@ -5,9 +5,11 @@ import 'package:mobile_traffic/screens/driver/driver_home.dart';
 import 'package:mobile_traffic/screens/driver/driver_notification.dart';
 import 'package:mobile_traffic/screens/driver/driver_settings.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
+import 'package:mobile_traffic/screens/signup/loginAsTraffic.dart';
 import 'package:mobile_traffic/screens/signup/signup.dart';
 import 'package:mobile_traffic/screens/signup/welcome.dart';
 import 'package:mobile_traffic/screens/traffic/report_form.dart';
+import 'package:mobile_traffic/screens/traffic/traffic_dashboard.dart';
 import 'package:mobile_traffic/services/shared_services.dart';
 
 import 'controllers/driver_controller/dashboard_bindings.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Demo',                                                 
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/' 
-        , page: ()=>_defaultHome,
+        , page: ()=>LoginAsTraffic(),
         
         
         ),
@@ -61,6 +63,12 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/driver_home' 
         , page: ()=>DriverDashBoard(),
+        binding:DashBoardBindings()
+        
+        ), 
+        GetPage(
+          name: '/traffic_home' 
+        , page: ()=>TrafficDashBoard(),
         binding:DashBoardBindings()
         
         )

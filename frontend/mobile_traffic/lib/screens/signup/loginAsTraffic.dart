@@ -8,15 +8,16 @@ import 'package:get/get.dart';
 
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:mobile_traffic/screens/signup/welcome.dart';
+import 'package:mobile_traffic/screens/traffic/violations.dart';
 import 'package:mobile_traffic/services/api_service.dart';
 
-class Login extends StatefulWidget {
+class LoginAsTraffic extends StatefulWidget {
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginAsTraffic> createState() => _LoginAsTrafficState();
 }
 
-class _LoginState extends State<Login> {
-  static final GlobalKey<FormState> globalFormKeyDriver = GlobalKey<FormState>();
+class _LoginAsTrafficState extends State<LoginAsTraffic> {
+  static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -50,7 +51,7 @@ class _LoginState extends State<Login> {
             Container(
                 padding: EdgeInsets.all(20),
                 child: Form(
-                    key: globalFormKeyDriver,
+                    key: globalFormKey,
                     child: Column(children: [
                       TextFormField(
                           controller: emailController,
@@ -80,69 +81,32 @@ class _LoginState extends State<Login> {
                             }
                             return null;
                           }),
-                      Button('LogIn', () async {
-                        LoginRequestModel model = LoginRequestModel(
-                            email: emailController.text,
-                            password: passwordController.text);
-                          if(emailController.text==""||passwordController.text==""){
-                           //this code will be changed to make the error report belo w the form field
-                            Get.snackbar( 
-                                "error", "Both fields must be filled",
-                                duration: Duration(seconds: 5),
-                                snackPosition: SnackPosition.TOP);
-                          }else{
-                            try{
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Center(child: CircularProgressIndicator(),);
-                                });
-                            await APIService.login(model);
-                            print('loged in');
-                            APIService.login(model).then((response) {
-                              setState(() {
-                                // isApiCallProcess = false;
-                              });
-                            
-                            if (response) {
-                              Get.toNamed('/driver_home');
-                            } else {
-                              Get.snackbar(
-                                  "errors", "Invalid Username/password!!",
-                                  duration: Duration(seconds: 10),
-                                  snackPosition: SnackPosition.BOTTOM);
-                            }
-                          });
-                            }catch(err){
-                               Get.snackbar( 
-                                "error", "you are not connected to the internet",
-                                duration: Duration(seconds: 5),
-                                snackPosition: SnackPosition.TOP);
-                            }
-                          }
-                        //Get.to(Violations())
+                      Button('LogIn', 
+                      // () async {
+                      //   LoginRequestModel model = LoginRequestModel(
+                      //       email: emailController.text,
+                      //       password: passwordController.text);
+                      //   await APIService.login(model);
+                      //   print('login');
+                      //   APIService.login(model).then((response) {
+                      //     setState(() {
+                      //       // isApiCallProcess = false;
+                      //     });
+
+                      //     if (response) {
+                          ()=> { Get.toNamed('/traffic_home')
+                    //       } else {
+                    //         Get.snackbar(
+                    //             "errors", "Invalid Username/password!!",
+                    //             duration: Duration(seconds: 10),
+                    //             snackPosition: SnackPosition.BOTTOM);
+                    //       }
+                    //     });
+                    //     //Get.to(Violations())
                       }, Color.fromRGBO(72, 131, 246, 1)),
-                      Button('Signup', () => {Get.to(Signup())},
-                          Color.fromRGBO(0, 193, 31, 0.25)),
-                    ]))),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: Image.asset('assets/google_logo.png',
-                        height: 31, width: 31),
-                  ),
-                ),
-                SignInButton(
-                  Buttons.Facebook,
-                  onPressed: () {},
-                  mini: true,
-                ),
-              ],
-            ),
+                     
+                    // ]))),
+           
             TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
@@ -151,7 +115,7 @@ class _LoginState extends State<Login> {
                     style: TextStyle(fontSize: 15, color: Colors.white))),
           ],
         )
-      ])),
+      ))])])),
     );
   }
 }
