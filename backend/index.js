@@ -11,12 +11,15 @@ const add_admin = require("./init/insertAdmin");
 
 const port = process.env.API_PORT || 5000;
 
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
+  console.log("Home page");
   res.json({ msg: "Home Page " });
 });
 app.use(express.json());
 
-app.get("/",(req , res)=>{res.send("home page")});
+app.get("/", (req, res) => {
+  res.send("home page");
+});
 
 const connection = mongoose.connection;
 connection.once("open", () => console.log("mongodb ping test seccussfull!"));
