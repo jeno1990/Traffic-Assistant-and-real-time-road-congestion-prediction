@@ -1,54 +1,61 @@
-// import 'dart:async';
+import './map_style.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
+class MapCircles extends StatefulWidget {
+  const MapCircles({ Key? key }) : super(key: key);
 
+  @override
+  _MapCirclesState createState() => _MapCirclesState();
+}
 
-// class MapSample extends StatefulWidget {
-//   @override
-//   State<MapSample> createState() => MapSampleState();
-// }
+class _MapCirclesState extends State<MapCircles> {
+  GoogleMapController? _controller;
+  Set<Circle> _circles = Set<Circle>();
 
-// class MapSampleState extends State<MapSample> {
-//   Completer<GoogleMapController> _controller = Completer();
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GoogleMap(
+        initialCameraPosition: _kGooglePlex,
+        circles: _circles,
+        onLongPress: (LatLng latLng) {
+          setState(() {
+            _circles.add(Circle(
+              circleId: CircleId('red'),
+              center: latLng,
+              radius: 300,
+              fillColor: Colors.red.shade500.withOpacity(.5),
+              strokeColor: Colors.red.shade300.withOpacity(.7),
+              strokeWidth: 5,
+            ));
+          });
+        },
+        onTap: (LatLng latLng) {
+          _circles.add(Circle(
+            consumeTapEvents: true,
+            circleId: CircleId('blue'),
+            center: latLng,
+            radius: 500.0,
+            fillColor: Colors.blue.shade500.withOpacity(.5),
+            strokeColor: Colors.blue.shade700.withOpacity(.7),
+            strokeWidth: 5,
+          ));
 
-//   static final CameraPosition _kGooglePlex = CameraPosition(
-//     target: LatLng(37.773932, -122.431297),
-//     zoom: 11.5,
-//   );
-
-//   static final CameraPosition _kLake = CameraPosition(
-//       bearing: 192.8334901395799,
-//       target: LatLng(37.43296265331129, -122.08832357078792),
-//       tilt: 59.440717697143555,
-//       zoom: 19.151926040649414
-//       );
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       body: GoogleMap(
-//         // mapType: MapType.hybrid,
-//         myLocationButtonEnabled: false,
-//         zoomControlsEnabled: false,
-//         initialCameraPosition: _kGooglePlex,
-        
-//         // onMapCreated: (GoogleMapController controller) {
-//         //   _controller.complete(controller);
-//         // },
-//       ),
-
-//       // floatingActionButton: FloatingActionButton.extended(
-//       //   onPressed: _goToTheLake,
-//       //   label: Text('To the lake!'),
-//       //   icon: Icon(Icons.directions_boat),
-//       // ),
-//     );
-//   }
-
-//   Future<void> _goToTheLake() async {
-//     final GoogleMapController controller = await _controller.future;
-//     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-//   }
-
-// }
+          setState(() {
+            _controller?.animateCamera(CameraUpdate.newLatLng(latLng));
+          });
+        },
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+          _controller!.setMapStyle(MapStyle().dark);
+        },
+      ),
+    );
+  }
+}

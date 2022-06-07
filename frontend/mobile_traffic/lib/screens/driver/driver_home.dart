@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
+import 'package:mobile_traffic/screens/driver/custom_search_delegate.dart';
 import 'package:mobile_traffic/screens/driver/osmap.dart';
+import 'package:mobile_traffic/screens/driver/search.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/driver/accident_form.dart';
@@ -41,39 +43,42 @@ class DriverHome extends StatelessWidget {
                     children: [
                       HeaderText("Driver"),
                       IconButton(
-                        icon: Icon(Icons.more_horiz),
-                        onPressed: ()async {
-                          Get.to(Login());
-                       await   SharedService.logout(context);
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          	showSearch(
+				              context: context,
+				// delegate to customize the search bar
+			            	delegate: CustomSearchDelegate()
+		               	);
+                       //await   SharedService.logout(context);
                           
                         },
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: size.width,
-                  height: 40,
-                  // color: Colors.white,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(
-                        width: 10,
-                      ),
+                // Container(
+                //   padding: EdgeInsets.all(10),
+                //   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                //   width: size.width,
+                //   height: 40,
+                //   // color: Colors.white,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(20),
+                //       color: Colors.white),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       SizedBox(
+                //         width: 10,
+                //       ),
                       // TextFormField(
                       //   decoration: InputDecoration(labelText: 'search here'),
                       // style: TextStyle(),
                       // )
-                    ],
-                  ),
-                ),
+                //     ],
+                //   ),
+                // ),
                 Container(
                   width: size.width,
                   child: TabBar(

@@ -4,21 +4,20 @@ import 'package:mobile_traffic/screens/driver/custom_search_delegate.dart';
 import 'package:mobile_traffic/services/api_service.dart';
 import 'package:get/get.dart';
 
-class CrowdedStreet extends StatefulWidget {
-  const CrowdedStreet({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  _CrowdedStreetState createState() => _CrowdedStreetState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _CrowdedStreetState extends State<CrowdedStreet> {
+class _SearchScreenState extends State<SearchScreen> {
   static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
 
   final crowdedStreetController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   	return Scaffold(
-	appBar: AppBar(
+   	return AppBar(
 		title: const Text(
 		"Driver",
 		),
@@ -35,9 +34,6 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
 			icon: const Icon(Icons.search),
 		)
 		],
-	),
-
-
-    );
+	);
   }
 }

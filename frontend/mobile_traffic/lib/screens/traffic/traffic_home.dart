@@ -6,16 +6,18 @@ import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart
 import 'package:mobile_traffic/screens/driver/accident_form.dart';
 import 'package:mobile_traffic/services/shared_services.dart';
 import 'package:get/get.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class TrafficHome extends StatelessWidget {
   // const DriverHome({ Key? key }) : super(key: key);
+  late IO.Socket socket;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return DefaultTabController(
-      length: 2,
-      child: Scaffold(
+        length: 2,
+        child: Scaffold(
           body: Container(
             width: size.width,
             height: size.height,
@@ -33,11 +35,14 @@ class TrafficHome extends StatelessWidget {
                     children: [
                       HeaderText("Traffic Police"),
                       IconButton(
-                        icon: Icon(Icons.more_horiz),
-                        onPressed: ()async {
-                          Get.to(Login());
-                       await   SharedService.logout(context);
-                          
+                        icon: Icon(Icons.visibility_off),
+                        onPressed: () {
+                          socket.disconnect();
+                          print("discon");
+                          socket.on("disconnect", (_) => print('Disconnected'));
+
+                          //     Get.to(Login());
+                          //  await   SharedService.logout(context);
                         },
                       ),
                     ],
@@ -114,7 +119,6 @@ class TrafficHome extends StatelessWidget {
               ],
             ),
           ),
-      )     
-    );
+        ));
   }
 }

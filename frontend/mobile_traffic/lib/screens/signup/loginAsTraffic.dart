@@ -94,6 +94,8 @@ class _LoginAsTrafficState extends State<LoginAsTraffic> {
                       //     });
 
                       //     if (response) {
+                        // ()=>{Get.to(HomePage())
+                        
                           ()=> { Get.toNamed('/traffic_home')
                     //       } else {
                     //         Get.snackbar(
