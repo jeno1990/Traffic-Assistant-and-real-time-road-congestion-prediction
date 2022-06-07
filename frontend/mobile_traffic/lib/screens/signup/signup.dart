@@ -194,13 +194,11 @@ class _SignupState extends State<Signup> {
                           phone_number: phone_numberController.text,
                           address: addressController.text,
                           password: passwordController.text);
-<<<<<<< HEAD
                            Get.snackbar(
                                 "Success", "Registered successfully!",
                                 duration: Duration(seconds: 10),
                                 snackPosition: SnackPosition.BOTTOM);
 
-=======
                       if(first_nameController.text==""||last_nameController.text==""||emailController.text==""||addressController.text==""||passwordController.text==""||phone_numberController.text==""){
                         Get.snackbar("error","all fields should be filled",
                               backgroundColor: Colors.red[200],
@@ -209,7 +207,6 @@ class _SignupState extends State<Signup> {
                               isDismissible: true,
                               snackStyle: SnackStyle.FLOATING);
                       }else{
->>>>>>> origin/main
                       print(passwordController.text);
                       // Get.to(DriverHome()),
                       try{

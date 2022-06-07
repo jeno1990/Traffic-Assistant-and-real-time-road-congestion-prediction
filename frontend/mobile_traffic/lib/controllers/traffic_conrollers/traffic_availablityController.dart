@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -7,29 +6,17 @@ import 'package:mobile_traffic/models/traffic_notification_model.dart';
 import 'package:mobile_traffic/services/api_service.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class TrafficNotificationController extends GetxController {
+class TrafficAvailabilityController extends GetxController {
   late IO.Socket socket;
   double? latitude;
   double? longtude;
-
-  // ignore: deprecated_member_use
-  var notificationList = List<NotificationModel>.empty(growable: true).obs;
   var isLoading = true.obs;
   var online = true;
-  @override
-  void onInit() {
-    print("hhhh" + notificationList.toString());
+  
 
-    getNotification();
-    //trafficDashboard;
-    initSocket();
-    update();
-    super.onInit();
-  }
 
   void inActive() {
     socket.disconnect();
-    // to check if the traffic is online or offline
   }
 
   var notificationTrafficList =
@@ -43,24 +30,17 @@ class TrafficNotificationController extends GetxController {
       });
       socket.on("userCount", (data) async {
         print(data);
+        //   final parsedJson = jsonDecode(data);
+// type: Restaurant
+        notificationTrafficList.add(
+            TrafficNotification("violationType", "plateNumber", "details"));
 
         final trafficNotification = await TrafficNotification.fromJson(data);
         notificationTrafficList.add(trafficNotification);
+        update();
 
-        if (notificationTrafficList.length <= 5) {
-          if (notificationTrafficList.length == 5) {
-            Timer timer = new Timer(new Duration(seconds: 60), () {
-              notificationTrafficList.removeLast();
-              print("removed after 60  seconds");
-            });
-          }
-          update();
-
-        }
+        print(notificationTrafficList.length);
       });
-
-      print(notificationTrafficList.length);
-
       socket.connect();
       socket.onConnect((data) => print('Connected: ${socket.id}'));
       print(socket.connected);
@@ -69,19 +49,5 @@ class TrafficNotificationController extends GetxController {
     }
   }
 
-  void getNotification() async {
-    try {
-      isLoading(true);
 
-      var notifications = await APIService.getNotification();
-      print(notifications);
-
-      if (notifications != null) {
-        notificationList.value = notifications;
-      }
-    } finally {
-      // TODO
-      isLoading(false);
-    }
-  }
 }

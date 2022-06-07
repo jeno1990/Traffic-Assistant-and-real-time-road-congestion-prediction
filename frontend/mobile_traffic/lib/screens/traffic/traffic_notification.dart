@@ -8,12 +8,16 @@ import 'package:mobile_traffic/screens/signup/login.dart';
 import 'package:mobile_traffic/screens/traffic/violations.dart';
 import 'package:mobile_traffic/services/api_service.dart';
 import 'package:mobile_traffic/services/shared_services.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class TrafficNotification extends StatelessWidget {
+  
   final notificationController = Get.put(TrafficNotificationController());
-
   @override
   Widget build(BuildContext context) {
+         //  print(notificationController.notificationTrafficList);
+
     Size size = MediaQuery.of(context).size;
     return DefaultTabController(
         length: 3,
@@ -36,8 +40,8 @@ class TrafficNotification extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.more_horiz),
                       onPressed: () async {
-                        Get.to(Login());
-                        await SharedService.logout(context);
+                        // Get.to(Login());
+                        // await SharedService.logout(context);
                       },
                     ),
                   ],
@@ -66,9 +70,10 @@ class TrafficNotification extends StatelessWidget {
               child: TabBarView(
                 children: [
                   Violations(),
-                  Violations(),
-                  Violations(),
+                  
 
+                  Violations(),
+                  Violations(),
                 ],
               ),
             ))

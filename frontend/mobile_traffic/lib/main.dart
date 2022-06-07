@@ -4,6 +4,8 @@ import 'package:mobile_traffic/screens/driver/driver_dashboard.dart';
 import 'package:mobile_traffic/screens/driver/driver_home.dart';
 import 'package:mobile_traffic/screens/driver/driver_notification.dart';
 import 'package:mobile_traffic/screens/driver/driver_settings.dart';
+import 'package:mobile_traffic/screens/driver/map.dart';
+import 'package:mobile_traffic/screens/driver/search_drop.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
 import 'package:mobile_traffic/screens/signup/loginAsTraffic.dart';
 import 'package:mobile_traffic/screens/signup/signup.dart';
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/' 
-        , page: ()=>LoginAsTraffic(),
+        , page: ()=>AwesomeDropdownExample(),
         
         
         ),
