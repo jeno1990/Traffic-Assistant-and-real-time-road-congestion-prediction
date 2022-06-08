@@ -1,35 +1,52 @@
-// // Install thingspeak client or include in your package.json
-// // npm install thingspeakclient
+const http = require("https");
+const findNearBy = require("../../controllers/nearby");
+const helper_client = require("../../helpers/clients");
+const Device_location = require("../../models/device_locations.model");
 
+const thingspeak = async () => {
+  const url =
+    "https://api.thingspeak.com/channels/1760569/feeds.json?api_key=5ACFV65GTC5VQJ3A&results=2";
+  await http
+    .get(url, (res) => {
+      res.on("data", (response) => {
+        // console.log("Chunk: " + response);
+        if (response) {
+          const thing = JSON.parse(response);
+          const length = thing.feeds.length - 1;
+          console.log(thing.feeds[length]);
+          var feeds = thing.feeds[length];
+          if(feeds.field1 >= 50){
+            overspeed(feeds.field2 , feeds.field3 , feeds.field1 , feeds.field4);
+          }
+          add_new_location(feeds.field2, feeds.field3 , feeds.field1);
+        }
+      });
+    })
+    .on("error", (err) => {
+      console.error("Error: " + err.message);
+    });
+};
+function overspeed(lat, lon, speed, plate_num) {
+  let near_by = findNearBy.findNearBy(helper_client.clientsMap , lat, lon);
+  // console.log("test");
+  for (i = 0; i < near_by.length; i++) {
+    io.to(near_by[i]).emit("message", { speed: speed, plate_num: plate_num });
+    console.log("message is sent to nearby traffic");
+  }
+}
 
-// var ThingSpeakClient = require('thingspeakclient');
-// var client = new ThingSpeakClient();
+function add_new_location(lat , lon , speed){
+  let new_location = new Device_location({
+    latitude: lat,
+    longitude: lon,
+    speed: speed,
+  });
 
-
-// var yourWriteKey = 'EATLI1NNXUGHJ1HQ';
-// var channelID = 72366;
-
-
-// client.attachChannel(channelID, { writeKey:'yourWriteKey'}, callBackThingspeak);
-
-
-// client.updateChannel(channelID, {field1: 7, field2: 6}, function(err, resp) {
-//     if (!err && resp > 0) {
-//         console.log('update successfully. Entry number was: ' + resp);
-//     }
-//     else {
-//       console.log(err);
-//     }
-// });
-
-
-
-// function callBackThingspeak(err, resp)
-// {
-//     if (!err && resp > 0) {
-//         console.log('Successfully. response was: ' + resp);
-//     }
-//     else {
-//       console.log(err);
-//     }
-// }
+  new_location.save((err) => {
+    if (err) {
+      condsole.log(err); // server error
+      return;
+    }
+  });
+}
+module.exports = { thingspeak };

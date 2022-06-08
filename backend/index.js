@@ -34,3 +34,4 @@ app.use("/api", Route);
 //to add admin on start
 add_admin();
 
+server.listen(port, () => console.log(`Server is running in port ${port}`));
