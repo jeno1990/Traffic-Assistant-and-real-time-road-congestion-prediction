@@ -26,21 +26,28 @@ function findDistace(lat1, lat2, lon1, lon2) {
 function findNearBy(clients, lat, lon) {
   //works fo traffics
   var nearTraffic = [];
-  for (i = 0; i < clients.length; i++) {
-    //this function calculates relative distance between traffics array and
-    //the device location(car location) and if less than 3km it adds to list
+
+  for (const [key, value] of clients.entries()) {
+
     let distance = findDistace(
-      clients[i].latitude,
+      value.latitude,
       lat,
-      clients[i].longitude,
+      value.longitude,
       lon
     );
     console.log(distance, "Km", " near_by");
     if (distance <= 3) {
       //socket id of users near to incident
-      nearTraffic.push(clients[i].socketId);
+      nearTraffic.push(value.socketId);
     }
+    console.log("lat: "+value.latitude+" lon: "+value.longitude);
   }
+
+  // for (i = 0; i < clients.length; i++) {
+  //   //this function calculates relative distance between traffics array and
+  //   //the device location(car location) and if less than 3km it adds to list
+    
+  // }
   return nearTraffic;
 }
 

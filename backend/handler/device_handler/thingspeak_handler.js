@@ -1,29 +1,52 @@
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const API_KEY="8UHT67ITOFDGRDHG";
+const http = require("https");
+const findNearBy = require("../../controllers/nearby");
+const helper_client = require("../../helpers/clients");
+const Device_location = require("../../models/device_locations.model");
 
-const thingspeak_handler= async (req,res)=>{
-    console.log("endponit");
-    const url=`https://api.thingspeak.com/channels/1638300/feeds.json?api_key=${API_KEY}&results=2`;
-    const options={
-      'method':"GET",
-    };
-    const response=await fetch(url,options)
-    .then(res=>res.json())
-    .catch(e =>{
-      console.error({
-        'message':"oh no",
-         error:e,
-      }
-
-      );
+const thingspeak = async () => {
+  const url =
+    "https://api.thingspeak.com/channels/1760569/feeds.json?api_key=5ACFV65GTC5VQJ3A&results=2";
+  await http
+    .get(url, (res) => {
+      res.on("data", (response) => {
+        // console.log("Chunk: " + response);
+        if (response) {
+          const thing = JSON.parse(response);
+          const length = thing.feeds.length - 1;
+          console.log(thing.feeds[length]);
+          var feeds = thing.feeds[length];
+          if(feeds.field1 >= 50){
+            overspeed(feeds.field2 , feeds.field3 , feeds.field1 , feeds.field4);
+          }
+          add_new_location(feeds.field2, feeds.field3 , feeds.field1);
+        }
+      });
+    })
+    .on("error", (err) => {
+      console.error("Error: " + err.message);
     });
-    console.log("response :",response);
-  res.json(response);
-  const thing=JSON.parse(JSON.stringify(response.feeds[0]));
-  //field value
-  console.log(thing.field1);
-
+};
+function overspeed(lat, lon, speed, plate_num) {
+  let near_by = findNearBy.findNearBy(helper_client.clientsMap , lat, lon);
+  // console.log("test");
+  for (i = 0; i < near_by.length; i++) {
+    io.to(near_by[i]).emit("message", { speed: speed, plate_num: plate_num });
+    console.log("message is sent to nearby traffic");
   }
-  module.exports={
-      thingspeak_handler
-  } 
+}
+
+function add_new_location(lat , lon , speed){
+  let new_location = new Device_location({
+    latitude: lat,
+    longitude: lon,
+    speed: speed,
+  });
+
+  new_location.save((err) => {
+    if (err) {
+      condsole.log(err); // server error
+      return;
+    }
+  });
+}
+module.exports = { thingspeak };

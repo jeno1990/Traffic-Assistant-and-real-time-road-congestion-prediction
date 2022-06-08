@@ -4,23 +4,24 @@ const device_locations = require("../../helpers/device_locations");
 const RoadModel = require("../../models/roads.model");
 const Device_location = require("../../models/device_locations.model");
 
-const device_location = function (req, res) {
-  let { lat, lon, speed } = req.body; //add plate number as reqest body
+const overspeed = function (req, res) {
+  let { lat, lon, speed, plate_num } = req.body; //add plate number as reqest body
   if (!lat || !lon || !speed) {
     res.status(400);
     res.json({ msg: "bad request" });
     return;
   }
-
-  let near_by = findNearBy(helper_client.clients, lat, lon);
+  // console.log("traffics map "+ helper_client.clientsMap);
+  let near_by = findNearBy.findNearBy(helper_client.clientsMap, lat, lon);
   if (near_by.length == 0) {
     res.status(200);
-    res.json({ msg: "no currently available traffic found" });
+    res.json({ msg: "No available currently traffic found" });
     return;
   }
   for (i = 0; i < near_by.length; i++) {
-    io.to(near_by[i]).emit("message", { speed: speed, plate_num: "07721" });
+    io.to(near_by[i]).emit("message", { speed: speed, plate_num: plate_num });
   }
+
   res.status(200);
   res.json({ msg: "report sent to nearby traffic" });
 };
@@ -60,7 +61,7 @@ const number_of_vehcle = function (req, res) {
 };
 
 module.exports = {
-  device_location,
+  overspeed,
   add_location,
   number_of_vehcle,
 };

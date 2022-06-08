@@ -24,12 +24,14 @@ function connect(io) {
   io.on("connection", (socket) => {
 
     console.log(socket.user.name, " joined ", socket.user);
-    client_helper.clientsFunction(socket.user) //to add the traffic to array
+    
+    client_helper.add_clientToMap(socket.user); //to add the traffic to array
     
     // socket.broadcast.emit("message", "new user joined");
     
     socket.on("disconnect", function () {
-      client_helper.remove_client(); //to delete the traffic from the array
+      // console.log(socket.conn.id);
+      client_helper.remove_client_from_map(socket.conn.id); //to delete the traffic from the array
     });
 
     socket.on("message", (data) => {
