@@ -46,9 +46,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/' 
-        , page: ()=>AwesomeDropdownExample(),
-        
-        
+        , page: ()=>DriverDashBoard(),
         ),
          GetPage(
           name: '/driver_login' 
