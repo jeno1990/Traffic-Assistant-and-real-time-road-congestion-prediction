@@ -1,28 +1,31 @@
-const mqtt = require("mqtt");
-const clientId = "jgmGZKIe7J"
-// const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
-var client = mqtt.connect("mqtt://broker.hivemq.com" , {
-  // clientId,
-  // username:"user",
-  // password:"user"
-  });
+const mqtt = require('mqtt')
 
-client.on("connect", function () {
-  // setInterval(function () {
-  //   var random = Math.random() * 50;
+const host = 'broker.emqx.io'
+const port = '1883'
+const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 
-  //   console.log(random);
+const connectUrl = `mqtt://${host}:${port}`
+const client = mqtt.connect(connectUrl, {
+  clientId,
+  clean: true,
+  connectTimeout: 4000,
+  username: 'emqx',
+  password: 'public',
+  reconnectPeriod: 1000,
+})
 
-  //   if (random < 30) {
-    console.log('Connected');
-    
-  //   }
-  // })
-  // ,
-  //   300000;
-});
-client.publish("something111", "temperature value: ");
-client.on("error", function (err) {
-  console.log(err);
-  // process.exit(1);
-});
+const topic = '/nodejs/mqtt'
+client.on('connect', () => {
+  console.log('Connected')
+  client.subscribe([topic], () => {
+    console.log(`Subscribe to topic '${topic}'`)
+  })
+  client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
+    if (error) {
+      console.error(error)
+    }
+  })
+})
+client.on('message', (topic, payload) => {
+  console.log('Received Message:', topic, payload.toString())
+})
