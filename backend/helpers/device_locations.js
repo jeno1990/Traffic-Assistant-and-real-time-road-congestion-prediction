@@ -8,6 +8,8 @@ function new_location(obj) {
   });
   console.log("inside device_locations ", device_locations);
 }
+
+
 function delete_old_data() {
   var time = Date.now();
   device_locations = device_locations.filter(function (item) {

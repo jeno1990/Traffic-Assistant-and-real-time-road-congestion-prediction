@@ -14,7 +14,7 @@ const gust = require("../handler/gust_handler");
 const router = express.Router();
 const device = require("../handler/device_handler/device");
 const admin = require("../handler/admin_handler/admin_login");
-
+const road = require("../handler/road_handler/road");
 //driver routes
 router.post(
   "/driver/driver_signup",
@@ -55,9 +55,13 @@ router.get("/traffic/reported_cases", traffic.reported_cases);
 router.post("/traffic/report_form", traffic.traffic_report_form);
 router.get("/test", traffic.test);
 
+
 //device routes
 router.post("/device/location_information", device.device_location);
+
 router.post("/device/new_location", device.add_location); //takes input lat and lon only
+
+
 //routers that weill be implemted
 /*
   traffic analysis -return data informations about a single traffic 
@@ -65,6 +69,14 @@ router.post("/device/new_location", device.add_location); //takes input lat and 
                    -
   
 */
+
+//road routes
+
+router.post("/roads/new_road", road.add_roads);
+router.post("/roads/new_path", road.add_path);
+router.get("/roads/list_of_roads", road.get_path_roads);
+router.get('/roads/get_destinations', road.get_destinations);
+router.get('/road/get_congesion_info/:road', road.get_congesion_info);
 //admin apis
 router.post("/admin/admin_login", admin.admin_login);
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // // const mqtt = require('mqtt');
 // // const client = mqtt.connect("mqtt://test.mosquitto.org",1883,0, {clientId:"mqtt-tester"});
 // // client.on('connect', function() {
@@ -52,3 +53,19 @@
 // client.on("offline", function() { 
 //     console.log("Client is currently offline") 
 // })  
+=======
+const mqtt = require("mqtt");
+
+var client = mqtt.connect("mqtt://broker.hivemq.com");
+
+client.on("connect", () => {
+  client.subscribe("something111");
+  console.log("client has subscribed");
+});
+
+client.on("message", function (topic, message) {
+  // message is Buffer
+  console.log(message.toString());
+  // client.end();
+});
+>>>>>>> cea8855a3d7c300d09502e7b4cd75e26f19d7bc1
