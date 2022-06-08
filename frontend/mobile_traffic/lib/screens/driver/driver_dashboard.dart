@@ -45,7 +45,7 @@ class DriverDashBoard extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.map),
-                label: 'Reminder',
+                label: 'Roads',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.notification_add),

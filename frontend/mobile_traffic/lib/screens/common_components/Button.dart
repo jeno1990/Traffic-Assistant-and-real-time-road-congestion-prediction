@@ -11,6 +11,7 @@ class Button extends StatelessWidget {
       padding: EdgeInsets.only(top:20),
     //  height: MediaQuery.of(context).size.width/5,
       child: SizedBox(
+        height: MediaQuery.of(context).size.width*0.13,
         width: double.infinity,
         child: RaisedButton(
           onPressed:

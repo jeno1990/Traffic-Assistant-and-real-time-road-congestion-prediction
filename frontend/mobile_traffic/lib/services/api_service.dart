@@ -115,6 +115,24 @@ class APIService {
       return null;
     }
   }
+  
+  static Future<List<NotificationModel>?> getCrowdedStreet() async {
+    var url = Uri.http(Config.apiURL, Config.trafficReportedAPI);
+    http.Response response = await client.get(url, headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    });
+    if (response.statusCode == 200) {
+      print(response.body);
+
+      return NotificationFromJson(response.body);
+
+      //return true;
+    } else {
+      return null;
+    }
+  }
+
 
   static Future<AccidentFormResponseModel> accident_form(
     AccidentFormRequestModel model,

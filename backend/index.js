@@ -29,7 +29,7 @@ connection.once("open",()=>console.log('mongodb connected'));
 
 setInterval( async ()=>{
     console.log("endponit");
-    const url=`https://api.thingspeak.com/channels/1638300/feeds.json?api_key=${API_KEY}&results=2`;
+    const url=`https://api.thingspeak.com/channels/1760569/feeds.json?api_key=5ACFV65GTC5VQJ3A&results=2`;
     const options={
       'method':"GET",
     };
@@ -61,4 +61,3 @@ app.use("/api",Route);
 //to add admin on start
 add_admin();
 
-server.listen(port, () => console.log(`Server is running in port ${port}`));

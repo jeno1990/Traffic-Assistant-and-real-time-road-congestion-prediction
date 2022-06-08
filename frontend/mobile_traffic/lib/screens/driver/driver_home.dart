@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:mobile_traffic/screens/driver/custom_search_delegate.dart';
+import 'package:mobile_traffic/screens/driver/map.dart';
 import 'package:mobile_traffic/screens/driver/osmap.dart';
 import 'package:mobile_traffic/screens/driver/search.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
@@ -98,52 +99,53 @@ class DriverHome extends StatelessWidget {
                     height: size.height * .692,
                     color: Colors.white,
                     child: TabBarView(children: [
-                      Stack(
-                        children: [
-                          Obx(()=>
-                          FlutterMap(
-                            options: MapOptions(
+                      MapCircles(),
+                      // Stack(
+                      //   children: [
+                      //     Obx(()=>
+                      //     FlutterMap(
+                      //       options: MapOptions(
                               
-                              // onTap: (point){
-                              //   location =
-                              // },
-                              enableScrollWheel: true,
-                              center: LatLng(location_controller.getLocationData().latitude as double ,location_controller.getLocationData().longitude as double),
-                              zoom: 17.0,
+                      //         // onTap: (point){
+                      //         //   location =
+                      //         // },
+                      //         enableScrollWheel: true,
+                      //         center: LatLng(location_controller.getLocationData().latitude as double ,location_controller.getLocationData().longitude as double),
+                      //         zoom: 17.0,
                               
-                            ),
-                            layers: [
-                              TileLayerOptions(
-                                urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                                subdomains: ['a', 'b', 'c'],
-                                attributionBuilder: (_) {
-                                  return Text("");
-                                },
-                              ),
-                              MarkerLayerOptions(
-                                markers: [
-                                  Marker(
-                                    width: 80.0,
-                                    height: 80.0,
-                                    point: LatLng((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double),
-                                    builder: (ctx) =>Icon(
-                                      Icons.location_on,
-                                      color: Colors.red,
-                                      size: 50,)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          right: 10,
-                          top:10,
-                          child: GestureDetector(
-                            onTap: (){
-                              Get.to(OSMap((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double));
-                              },
-                            child: Icon(Icons.explore_rounded,size: 35,)))
-                        ]), //the first tab
+                      //       ),
+                      //       layers: [
+                      //         TileLayerOptions(
+                      //           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      //           subdomains: ['a', 'b', 'c'],
+                      //           attributionBuilder: (_) {
+                      //             return Text("");
+                      //           },
+                      //         ),
+                      //         MarkerLayerOptions(
+                      //           markers: [
+                      //             Marker(
+                      //               width: 80.0,
+                      //               height: 80.0,
+                      //               point: LatLng((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double),
+                      //               builder: (ctx) =>Icon(
+                      //                 Icons.location_on,
+                      //                 color: Colors.red,
+                      //                 size: 50,)),
+                      //           ],
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      //   Positioned(
+                      //     right: 10,
+                      //     top:10,
+                      //     child: GestureDetector(
+                      //       onTap: (){
+                      //         Get.to(OSMap((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double));
+                      //         },
+                      //       child: Icon(Icons.explore_rounded,size: 35,)))
+                      //   ]), //the first tab
 
                       Container(
                         //the second tab

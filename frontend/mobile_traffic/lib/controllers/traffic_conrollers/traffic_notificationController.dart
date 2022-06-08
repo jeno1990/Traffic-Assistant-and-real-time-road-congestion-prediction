@@ -44,7 +44,7 @@ class TrafficNotificationController extends GetxController {
       socket.on("userCount", (data) async {
         print(data);
 
-        final trafficNotification = await TrafficNotification.fromJson(data);
+        final trafficNotification = TrafficNotification.fromJson(data);
         notificationTrafficList.add(trafficNotification);
 
         if (notificationTrafficList.length <= 5) {

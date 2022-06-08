@@ -1,24 +1,20 @@
 class CrowdedStreetRequestModel {
   CrowdedStreetRequestModel({
-   // this.id,
-    this.crowdedStreet,
-    t
-    
+    this.source,
+    this.destination,
   });
-  //late final String? id;
-  late final String? crowdedStreet;
- 
-  
+  late final String? source;
+  late final String? destination;
 
   CrowdedStreetRequestModel.fromJson(Map<String, dynamic> json) {
-    crowdedStreet = json['crowdedStreet'];
-   
+    source = json['source'];
+    destination = json['destination'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['crowdedStreet'] = crowdedStreet;
-   
+    _data['source'] = source;
+    _data['destination'] = destination;
     return _data;
   }
 }

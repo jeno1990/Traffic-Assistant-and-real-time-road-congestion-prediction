@@ -30,11 +30,13 @@ dependencies:
   get: ^4.6.1
   socket_io_client: ^2.0.0-beta.4-nullsafety.0
   google_maps_flutter: ^2.1.7
-  dropdown_search: ^5.0.2
-  searchfield: ^0.6.5
+  dropdown_plus: ^0.0.9
+  #dropdown_search: ^5.0.2
+  # searchfield: ^0.6.5
   http: ^0.13.4
   latlng: ^0.1.0
   location: ^4.3.0
+  geolocator: ^8.2.1
   flutter_polyline_points: ^1.0.0
   dio: ^4.0.6
   url_launcher: ^6.0.18

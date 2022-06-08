@@ -35,7 +35,7 @@ class TrafficAvailabilityController extends GetxController {
         notificationTrafficList.add(
             TrafficNotification("violationType", "plateNumber", "details"));
 
-        final trafficNotification = await TrafficNotification.fromJson(data);
+        final trafficNotification = TrafficNotification.fromJson(data);
         notificationTrafficList.add(trafficNotification);
         update();
 
