@@ -1,10 +1,10 @@
-const express= require('express');
+const express = require("express");
 // const fetch= require("node-fetch");
 // mod.cjs
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 // const API_KEY="8UHT67ITOFDGRDHG";
 // const { thingspeak_handler } = require('../handler/thingspeak_handler');
-
 
 const middlewares = require("../middlewares/auth");
 const driver_profile = require("../handler/driver_handler/driver_profile_handler");
@@ -55,12 +55,10 @@ router.get("/traffic/reported_cases", traffic.reported_cases);
 router.post("/traffic/report_form", traffic.traffic_report_form);
 router.get("/test", traffic.test);
 
-
 //device routes
-router.post("/device/location_information", device.device_location);
+router.post("/device/location_information", device.overspeed);
 
 router.post("/device/new_location", device.add_location); //takes input lat and lon only
-
 
 //routers that weill be implemted
 /*
@@ -75,17 +73,16 @@ router.post("/device/new_location", device.add_location); //takes input lat and 
 router.post("/roads/new_road", road.add_roads);
 router.post("/roads/new_path", road.add_path);
 router.get("/roads/list_of_roads", road.get_path_roads);
-router.get('/roads/get_destinations', road.get_destinations);
-router.get('/road/get_congesion_info/:road', road.get_congesion_info);
+router.get("/roads/get_destinations", road.get_destinations);
+router.get("/road/get_congesion_info/:road", road.get_congesion_info);
 //admin apis
 router.post("/admin/admin_login", admin.admin_login);
 
 //gust routes
 
-router.post("/gust/gust_form",gust.gust_form);
+router.post("/gust/gust_form", gust.gust_form);
 
 //thingspeak route
 // router.get("/thingspeak",thingspeak_handler)
 
-
-  module.exports = router;
+module.exports = router;
