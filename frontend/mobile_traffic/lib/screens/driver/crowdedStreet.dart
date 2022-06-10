@@ -55,8 +55,10 @@ class StreetList extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.car_repair), //Text("${index+1}"),
             ),
-            title: Text(notificationController.notificationList[index][0]+"-->"+notificationController.notificationList[index][1]),
-            subtitle: Text("In  "+notificationController.notificationList[index][2]+"  street  crowdedness upto 345 cars with avarage speed 34"),
+            title: Text(""),
+              //notificationController.notificationList[index][0]+"-->"+notificationController.notificationList[index][1]),
+            subtitle: Text(""),
+              //"In  "+notificationController.notificationList[index][2]+"  street  crowdedness upto 345 cars with avarage speed 34"),
           ),
         ),
       );

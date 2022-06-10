@@ -28,10 +28,10 @@ class Violations extends StatelessWidget {
             leading: CircleAvatar(
               child: Icon(Icons.car_repair), //Text("${index+1}"),
             ),
-            title: Text(notificationController
-                .notificationTrafficList[index].violationType),
+            title: Text("Plate Number"+notificationController
+                .notificationTrafficList[index][0]),
             subtitle: Text(notificationController
-                .notificationTrafficList[index].plateNumber),
+                .notificationTrafficList[index][1]+"KMPH"),
           ),
         ),
       );

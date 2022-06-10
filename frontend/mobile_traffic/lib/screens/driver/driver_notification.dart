@@ -16,7 +16,6 @@ class DriverNotification extends StatelessWidget {
         body: Column(
           children: [
             Expanded(child: Obx(() {
-             // print(notifiCationController.notificationList.length);
            return  notificationController.isLoading.value?
               Center(
                child: CircularProgressIndicator(color: Colors.black,),

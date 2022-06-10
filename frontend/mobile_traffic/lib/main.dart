@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/' 
-        , page: ()=>DriverDashBoard(),
+        , page: ()=>TrafficDashBoard(),
         ),
          GetPage(
           name: '/driver_login' 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
+import 'package:mobile_traffic/screens/driver/map.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/driver/accident_form.dart';
@@ -79,7 +80,7 @@ class TrafficHome extends StatelessWidget {
                         text: 'Directions',
                       ),
                       Tab(
-                        text: 'To find traffic police',
+                        text: 'Report Form',
                       ),
                     ],
                   ),
@@ -90,7 +91,7 @@ class TrafficHome extends StatelessWidget {
                     height: size.height * .692,
                     color: Colors.white,
                     child: TabBarView(children: [
-                      Icon(Icons.directions), //the first tab
+                      MapCircles(), //the first tab
 
                       Container(
                         //the second tab

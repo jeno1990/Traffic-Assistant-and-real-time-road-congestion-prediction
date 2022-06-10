@@ -32,8 +32,25 @@ class TrafficNotificationController extends GetxController {
     // to check if the traffic is online or offline
   }
 
-  var notificationTrafficList =
-      List<TrafficNotification>.empty(growable: true).obs;
+  var notificationTrafficList = [
+    [
+      "A7897",
+      "80"
+    ],
+    [
+      "A78973",
+      "100"
+    ],
+    [
+      "B70965",
+      "180"
+    ],
+    [
+      "A789790",
+      "89"
+    ]
+  ];
+  //List<TrafficNotification>.empty(growable: true).obs;
 
   Future<void> initSocket() async {
     try {
@@ -41,11 +58,11 @@ class TrafficNotificationController extends GetxController {
         "transports": ["websocket"],
         "autoConnect": true,
       });
-      socket.on("userCount", (data) async {
+      socket.on("message", (data) async {
         print(data);
 
-        final trafficNotification = TrafficNotification.fromJson(data);
-        notificationTrafficList.add(trafficNotification);
+      //  final trafficNotification = TrafficNotification.fromJson(data);
+      //  notificationTrafficList.add(trafficNotification);
 
         if (notificationTrafficList.length <= 5) {
           if (notificationTrafficList.length == 5) {
@@ -55,7 +72,6 @@ class TrafficNotificationController extends GetxController {
             });
           }
           update();
-
         }
       });
 

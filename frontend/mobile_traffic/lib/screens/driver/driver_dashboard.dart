@@ -26,7 +26,7 @@ class DriverDashBoard extends StatelessWidget {
             index: controller.buttomIndex,
             children: [
               DriverHome(),
-              DriverTool(),
+              // DriverTool(),
               DriverReminder(),
               DriverNotification(),
               DriverSettings(),
@@ -39,10 +39,10 @@ class DriverDashBoard extends StatelessWidget {
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.flag),
-                label: 'Tools',
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.flag),
+              //   label: 'Tools',
+              // ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.map),
                 label: 'Roads',
