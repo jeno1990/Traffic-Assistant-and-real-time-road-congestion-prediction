@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 // import 'package:searchfield/searchfield.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:get/get.dart';
+import 'package:mobile_traffic/controllers/driver_controller/crowded_streetController.dart';
 import 'package:mobile_traffic/models/crowded_street_requestModel.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/driver/crowdedStreet.dart';
+import 'package:mobile_traffic/services/api_service.dart';
 
 class CrowdedStreet extends StatefulWidget {
   @override
@@ -14,6 +16,7 @@ class CrowdedStreet extends StatefulWidget {
 }
 
 class _CrowdedStreetState extends State<CrowdedStreet> {
+  CrowdedStreetController listOfRoads = Get.find<CrowdedStreetController>();
   final List<Map<String, dynamic>> _roles = [
     {"name": "Ayer Tena", "desc": "Having full access rights", "role": 1},
     {
@@ -46,7 +49,7 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
   ];
   var source = "";
   var destination = "";
-
+  var listRoad;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +70,7 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
               onChanged: (dynamic str) {
                 print(str);
                 setState(() {
-                  source = str;
+                  // source = str['name'];
                   // state.didChange(newValue);
                 });
               },
@@ -107,9 +110,15 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
                   suffixIcon: Icon(Icons.arrow_drop_down),
                   labelText: "Destination"),
               onSaved: (dynamic str) {
-                print(str);
+                //  print("strrrrrrrrrrrrrrrrrrrrrrrrrrkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
               },
               onChanged: (dynamic str) {
+                print(
+                    "strrrrrrrrrrrrrrjjjjjjjjjjjrrrrrrrrrrrrkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+                //  Json.decode(str);
+                // destination=str['name'];
+                print(str);
+
                 User user = User.fromJson(str);
                 setState(() {
                   destination = str;
@@ -145,10 +154,13 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
             ),
             Button('Submit', () async {
               CrowdedStreetRequestModel model = CrowdedStreetRequestModel(
-                source: "source",
-                destination: "destination",
+                source: "6 kilo",
+                destination: "megenagna",
               );
+              //  listRoad = await APIService.getCrowdedStreet(model);
+              // listRoadsController.
 
+              listOfRoads.getListOfRoads(model);
               if (source == "" || destination == "") {
                 Get.snackbar("error", "all fields should be filled",
                     backgroundColor: Colors.red[200],
@@ -166,7 +178,9 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
                           child: CircularProgressIndicator(),
                         );
                       });
-                  // await APIService.register(model);
+                  //     await APIService
+                  // .getCrowdedStreet(); //////////////////////have to send query ?????????????
+
                 } catch (err) {
                   Get.snackbar(
                     "Network error", "try again",
@@ -180,7 +194,8 @@ class _CrowdedStreetState extends State<CrowdedStreet> {
             SizedBox(
               height: 30,
             ),
-          //  Expanded(child: StreetList()),
+            (listRoad==null)?Container():
+            Expanded(child: StreetList(listRoad)),
           ],
         ),
       ),
@@ -192,9 +207,10 @@ class User {
   String name;
   String desc;
   int role;
-  User(this.name,this.desc, this.role);
+  User(this.name, this.desc, this.role);
   factory User.fromJson(dynamic json) {
-    return User(json['name'] as dynamic,json['desc'] as dynamic, json['role'] as dynamic);
+    return User(json['name'] as dynamic, json['desc'] as dynamic,
+        json['role'] as dynamic);
   }
   @override
   String toString() {

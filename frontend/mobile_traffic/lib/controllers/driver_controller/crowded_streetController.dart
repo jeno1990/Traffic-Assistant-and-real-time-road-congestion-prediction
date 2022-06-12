@@ -6,54 +6,60 @@ import 'package:mobile_traffic/services/api_service.dart';
 
 class CrowdedStreetController extends GetxController {
   // ignore: deprecated_member_use
-//  static var notificationList = List<CrowdedStreetResponseModel>.empty(growable: true).obs;
-static String source="";
-static String destination="";
-static String street="";
+  CrowdedStreetController() {
+    print("in the constructor");
+  }
+  static late String source;
+  static late String destination;
+  var crowdedList = List<CrowdedStreetResponseModel>.empty(growable: true).obs;
+// static String source="";
+// static String destination="";
+  static String street = "";
 
-   var notificationList = [
-    
-      [
-      "megenagna",
-       "bole",
-        "main road",
-      ],
-      [
-      "megenagna",
-         "bole",
-        "24",
-      ],
-      [
-      "Megenagna",
-       "Bole",
-      "Gerji",
-  ],
+  //  var notificationList = [
+
+  //     [
+  //     "megenagna",
+  //      "bole",
+  //       "main road",
+  //     ],
+  //     [
+  //     "megenagna",
+  //        "bole",
+  //       "24",
+  //     ],
+  //     [
+  //     "Megenagna",
+  //      "Bole",
+  //     "Gerji",
+  // ],
   //  [
   //       source= "Megenagna",
   //       destination= "Bole",
   //       street= "Studium",
   //  ],
-    
-  ];
+
+  // ];
   var isLoading = false.obs;
   @override
   void onInit() {
-    print("crowded" + notificationList.toString());
+    print("crowded" + crowdedList.toString());
 
-    getNotification();
+    // getListOfRoads();
     update();
     super.onInit();
   }
 
-  void getNotification() async {
+  void getListOfRoads(model) async {
     try {
       isLoading(true);
 
-      var notifications = await APIService.getCrowdedStreet();
+      var notifications = await APIService.getCrowdedStreet(model);
+      //  var notifications = model;
       print(notifications);
 
       if (notifications != null) {
-        // notificationList.value = notifications.cast<CrowdedStreetResponseModel>();
+        crowdedList.value = notifications;
       }
     } finally {
       // TODO

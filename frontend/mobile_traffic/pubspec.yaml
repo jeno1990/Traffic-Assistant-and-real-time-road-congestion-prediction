@@ -44,6 +44,7 @@ dependencies:
   snippet_coder_utils: ^1.0.12
   # draggable_home: ^1.0.2
   #dropdown_formfield: ^0.1.4
+  flutter_secure_storage: ^5.0.2
 
 
 dev_dependencies:

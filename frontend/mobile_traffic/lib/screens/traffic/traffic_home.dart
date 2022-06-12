@@ -5,6 +5,8 @@ import 'package:mobile_traffic/screens/driver/map.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/driver/accident_form.dart';
+import 'package:mobile_traffic/screens/traffic/maps_traffic.dart';
+import 'package:mobile_traffic/screens/traffic/report_form.dart';
 import 'package:mobile_traffic/services/shared_services.dart';
 import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -49,29 +51,29 @@ class TrafficHome extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: size.width,
-                  height: 40,
-                  // color: Colors.white,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      // TextFormField(
-                      //   decoration: InputDecoration(labelText: 'search here'),
-                      // style: TextStyle(),
-                      // )
-                    ],
-                  ),
-                ),
+                // Container(
+                //   padding: EdgeInsets.all(10),
+                //   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                //   width: size.width,
+                //   height: 40,
+                //   // color: Colors.white,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(20),
+                //       color: Colors.white),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       Icon(Icons.search),
+                //       SizedBox(
+                //         width: 10,
+                //       ),
+                //       // TextFormField(
+                //       //   decoration: InputDecoration(labelText: 'search here'),
+                //       // style: TextStyle(),
+                //       // )
+                //     ],
+                //   ),
+                // ),
                 Container(
                   width: size.width,
                   child: TabBar(
@@ -91,35 +93,20 @@ class TrafficHome extends StatelessWidget {
                     height: size.height * .692,
                     color: Colors.white,
                     child: TabBarView(children: [
-                      MapCircles(), //the first tab
-
-                      Container(
-                        //the second tab
-                        padding: EdgeInsets.all(0),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                width: size.width,
-                                height: 40,
-                                child: Text(
-                                  "accident report form",
-                                  style: TextStyle(fontSize: 18),
-                                  textAlign: TextAlign.center,
-                                )),
-                            Accident_Form(),
+                      // MapCircles(), //the first tab
+                    //  ° N, ° E
+MapTraffic(38.4955, 7.0504),
+                     
+                            Report_form(),
                           ],
                         ),
                       )
-                    ]),
+          )]),
+          
                   ),
-                )
-              ],
-            ),
-          ),
-        ));
+                //   bottomNavigationBar: BottomNavigation(),
+                ));
+              
+            
   }
 }

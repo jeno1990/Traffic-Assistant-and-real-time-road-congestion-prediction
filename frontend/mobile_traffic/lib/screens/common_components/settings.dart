@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:mobile_traffic/screens/common_components/change_password.dart';
 
 class Settings extends StatefulWidget {
   late final String name;
@@ -75,10 +76,9 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          widget.imageUrl
-                         // "https://static.remove.bg/remove-bg-web/035676ee65d6ce9f128769532ffdff315f3005c7/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg"),
-                      )),
+                          backgroundImage: NetworkImage(widget.imageUrl
+                              // "https://static.remove.bg/remove-bg-web/035676ee65d6ce9f128769532ffdff315f3005c7/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg"),
+                              )),
                       trailing: Icon(
                         Icons.edit,
                         color: Colors.white,
@@ -100,6 +100,7 @@ class _SettingsState extends State<Settings> {
                           title: Text("Change Password"),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
+                            Get.to(ChangePassword());
                             //open change password
                           },
                         ),
@@ -140,14 +141,17 @@ class _SettingsState extends State<Settings> {
                     contentPadding: const EdgeInsets.all(0),
                     value: true,
                     title: Text("Received notification"),
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      val = false;
+                    },
                   ),
-                
                   SwitchListTile(
                     contentPadding: const EdgeInsets.all(0),
                     value: true,
                     title: Text("Received Offer Notification"),
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      val = false;
+                    },
                   ),
                   SwitchListTile(
                     contentPadding: const EdgeInsets.all(0),
@@ -159,32 +163,7 @@ class _SettingsState extends State<Settings> {
                 ],
               ),
             ),
-            // Positioned(
-            //   bottom: -20,
-            //   left: -20,
-            //   child: Container(
-            //     width: 80,
-            //     height: 80,
-            //     alignment: Alignment.center,
-            //     decoration: BoxDecoration(
-            //       color: Colors.purple,
-            //       shape: BoxShape.circle,
-            //     ),
-            //   ),
-            // ),
-            // Positioned(
-            //   bottom: 00,
-            //   left: 00,
-            //   child: IconButton(
-            //     icon: Icon(
-            //       FontAwesomeIcons.powerOff,
-            //       color: Colors.white,
-            //     ),
-            //     onPressed: () {
-            //       //log out
-            //     },
-            //   ),
-            // )
+            
           ],
         ),
       ),

@@ -1,61 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mobile_traffic/models/traffic_report_request_model.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 //import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
+import 'package:mobile_traffic/services/api_service.dart';
+class Report_form extends StatefulWidget {
+  const Report_form({ Key? key }) : super(key: key);
 
-class Report_form extends StatelessWidget {
- 
+  @override
+  State<Report_form> createState() => _Report_formState();
+}
+
+class _Report_formState extends State<Report_form> {
+  
+  final violation_typeController = TextEditingController();
+  final plate_numberController = TextEditingController(); 
+  final driver_nameController = TextEditingController();
+  final commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: Column(children: [
-     // Traffc_background("Report Form"),
-       Container(
-                          color: Colors.blue,
-
-         width: double.infinity,
-         child: Row(
-
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             Expanded(
-               child: Container(
-                 padding:EdgeInsets.only(bottom: 10),
-                          height: MediaQuery.of(context).size.height*0.2,
-                          decoration: BoxDecoration(
-                          ),
-                          width: double.infinity,
-                          child: Container(padding: EdgeInsets.fromLTRB(30, 30, 0, 10) ,child: HeaderText("Report Form")),
-                        ),
-             ),
-                      IconButton(
-                        onPressed: (){
-                       
-                                        },
-                                      
-                                      icon: Icon(true?Icons.visibility:Icons.visibility_off)),
-           ],
-         ),
-       ),
-      Expanded(
-        child: Container(
-          color: Colors.blue,
-          child: Container(
-             decoration: BoxDecoration(
-                 color:Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40)
-                ),
-             ),
-           padding: EdgeInsets.only(top:10),
-            child: ScrollConfiguration(
-              behavior:ScrollBehavior() ,
-              child: SingleChildScrollView(
-                physics: new ClampingScrollPhysics(),
-                child: Column(
+    return  ListView(
                   children: [
                     
                     Text(
@@ -70,97 +36,25 @@ class Report_form extends StatelessWidget {
                   //  key: formKey,
                     child: Column(children: [
                       TextFormField(
+                        controller: plate_numberController,
                         decoration: InputDecoration(
                           labelText: "Plate number",
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(top: 5),
-                       decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                      child:Text("hee"),
-                          // child: DropDownFormField(
-                            
-                          //   titleText: 'Violation type',
-                          //   // value: _violation,
-                          //   // onSaved: (value) {
-                          //   //   setState(() {
-                          //   //     _violation = value;
-                          //   //   });
-                          //   // },
-                          //   // onChanged: (value) {
-                          //   //   setState(() {
-                          //   //     _violation = value;
-                          //   //   });
-                          //   // },
-                          //   dataSource: [
-                          //     {
-                          //       "display": "Over Speed",
-                          //       "value": "Over Speed",
-                          //     },
-                          //     {
-                          //       "display": "With out driving licence",
-                          //       "value": "With out driving licence",
-                          //     },
-                          //     {
-                          //       "display": "Ilegal driving",
-                          //       "value": "Ilegal driving",
-                          //     },
-                          //     {
-                          //       "display": "Over Specified Triff",
-                          //       "value": "Over Specified Tariff",
-                          //     },
-                          //     {
-                          //       "display": "Vehicle is not ready for driving",
-                          //       "value": "Vehicle is not ready for driving",
-                          //     },
-                          //   ],
-                          //   textField: 'display',
-                          //   valueField: 'value',
-                          // ),
+                       TextFormField(
+                         controller: violation_typeController,
+                        decoration: InputDecoration(
+                          labelText: "Violation type",
                         ),
-                      
-                      Container(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Text(''),
-                        // DropDownFormField(
-                        //   titleText: 'Action Taken',
-                        //   // value: _actionTaken,
-                        //   // onSaved: (value) {
-                        //   //   setState(() {
-                        //   //     _actionTaken = value;
-                        //   //   });
-                        //   // },
-                        //   // onChanged: (value) {
-                        //   //   setState(() {
-                        //   //     _actionTaken = value;
-                        //   //   });
-                         
-                        //   dataSource: [
-                        //     {
-                        //       "display": "Suspend Driving Licence",
-                        //       "value": "Suspend Driving Licence",
-                        //     },
-                        //     {
-                        //       "display": "Removing Vehicle plate",
-                        //       "value": "Removing Vehicle plate",
-                        //     },
-                        //     {
-                        //       "display": "Removing Vehicle Bollo",
-                        //       "value": "Removing Vehicle Bollo",
-                        //     },
-                        //   ],
-                        //   textField: 'display',
-                        //   valueField: 'value',
-                        // ),
                       ),
                       TextFormField(
+                        controller: driver_nameController,
                         decoration: InputDecoration(
                           labelText: "Driver Name",
                         ),
                       ),
                       TextFormField(
+                        controller: commentController,
                         decoration:InputDecoration(
                           labelText: "Write a Comment ..."
                         ),
@@ -168,18 +62,25 @@ class Report_form extends StatelessWidget {
                         maxLines:5,
                         keyboardType: TextInputType.multiline,
                       ),
-                      Button("Submit", (){}, Color.fromRGBO(72, 131, 246, 1))
+                      Button("Submit", ()async{
+                        TrafficReportRequestModel model = TrafficReportRequestModel(
+                        violation_type: violation_typeController.text,
+                        plate_number: plate_numberController.text,
+                        driver_name: driver_nameController.text,
+                        comment: commentController.text
+                        
+                        );
+                    await APIService.traffic_report_form(model);
+                    print('Traffic Report formm');
+                    Get.snackbar("Accident Form", "Your report is successfully submited",
+                        duration: Duration(seconds: 10),
+                        snackPosition: SnackPosition.BOTTOM);
+                      }, Color.fromRGBO(72, 131, 246, 1))
                     ])),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    ]),
-    bottomNavigationBar: BottomNavigation(),
-    ));
-  }
-}
+                    ),
+                  
+             
+   ]
+    
+ ); }}
+

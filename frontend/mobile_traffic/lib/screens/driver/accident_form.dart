@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mobile_traffic/models/accident_form_request_model.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/services/api_service.dart';
@@ -38,11 +39,21 @@ class _Accident_FormState extends State<Accident_Form> {
                   //   decoration: InputDecoration(labelText: "Accident ocurance time"),
                   // ),
                   Button("submit", () async {
+                    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+                      print(position.longitude); //Output: 80.24599079
+                      print(position.latitude); //Output: 29.6593457
+
+String long = position.longitude.toString();
+String lat = position.latitude.toString();
                     AccidentFormRequestModel model = AccidentFormRequestModel(
                         accident_type: accident_typeController.text,
-                        plate_number: plate_numberController.text);
+                        plate_num: plate_numberController.text,
+                        lat:lat,
+                        lon:long,
+                        driver_name:"yeshi"
+                        );
                     await APIService.accident_form(model);
-                    print('accident formm');
+                    print('accident formm');      
                     Get.snackbar("Accident Form", "Your report is successfully submited",
                         duration: Duration(seconds: 10),
                         snackPosition: SnackPosition.BOTTOM);

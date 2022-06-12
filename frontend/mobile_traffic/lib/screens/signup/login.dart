@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_traffic/models/login_request_model.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
@@ -5,10 +7,10 @@ import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:mobile_traffic/screens/signup/components/background_for_signup.dart';
 import 'package:mobile_traffic/screens/signup/signup.dart';
 import 'package:get/get.dart';
-
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:mobile_traffic/screens/signup/welcome.dart';
 import 'package:mobile_traffic/services/api_service.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   @override
@@ -16,7 +18,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  static final GlobalKey<FormState> globalFormKeyDriver = GlobalKey<FormState>();
+  static final GlobalKey<FormState> globalFormKeyDriver =
+      GlobalKey<FormState>();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -80,46 +83,59 @@ class _LoginState extends State<Login> {
                             }
                             return null;
                           }),
+                      //  Button("text", (){}, Colors.black),
                       Button('LogIn', () async {
                         LoginRequestModel model = LoginRequestModel(
                             email: emailController.text,
                             password: passwordController.text);
-                          if(emailController.text==""||passwordController.text==""){
-                           //this code will be changed to make the error report belo w the form field
-                            Get.snackbar( 
-                                "error", "Both fields must be filled",
-                                duration: Duration(seconds: 5),
-                                snackPosition: SnackPosition.TOP);
-                          }else{
-                            try{
-                              showDialog(
+
+                        if (emailController.text == "" ||
+                            passwordController.text == "") {
+                          //this code will be changed to make the error report belo w the form field
+                          Get.snackbar("error", "Both fields must be filled",
+                              duration: Duration(seconds: 5),
+                              snackPosition: SnackPosition.TOP);
+                        } else {
+                          try {
+                            showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return Center(child: CircularProgressIndicator(),);
+                              //    Timer(10000, callback)
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
                                 });
-                            await APIService.login(model);
-                            print('loged in');
-                            APIService.login(model).then((response) {
+
+                            //  await APIService.login(model);
+
+// var url = Uri.parse('http://10.5.215.255/api/driver/driver_login');
+// var response = await http.post(url, body: {'email': emailController.text, 'password': passwordController.text});
+// print('Response status: ${response.statusCode}');
+// print('Response body: ${response.body}');
+
+                            await APIService.login(model).then((response) {
                               setState(() {
                                 // isApiCallProcess = false;
                               });
-                            
-                            if (response) {
-                              Get.toNamed('/driver_home');
-                            } else {
-                              Get.snackbar(
-                                  "errors", "Invalid Username/password!!",
-                                  duration: Duration(seconds: 10),
-                                  snackPosition: SnackPosition.BOTTOM);
-                            }
-                          });
-                            }catch(err){
-                               Get.snackbar( 
-                                "error", "you are not connected to the internet",
+                              print('loged in');
+
+                              if (response) {
+                         
+                                Get.toNamed('/driver_home');
+                              } else {
+                                Get.snackbar(
+                                    "errors", "Invalid Username/password!!",
+                                    duration: Duration(seconds: 10),
+                                    snackPosition: SnackPosition.BOTTOM);
+                              }
+                            });
+                          } catch (err) {
+                            Get.snackbar("error",
+                                "you are not connected to the internet",
                                 duration: Duration(seconds: 5),
                                 snackPosition: SnackPosition.TOP);
-                            }
                           }
+                        }
                         //Get.to(Violations())
                       }, Color.fromRGBO(72, 131, 246, 1)),
                       Button('Signup', () => {Get.to(Signup())},

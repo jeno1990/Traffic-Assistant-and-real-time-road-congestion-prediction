@@ -33,7 +33,7 @@ class TrafficAvailabilityController extends GetxController {
         //   final parsedJson = jsonDecode(data);
 // type: Restaurant
         notificationTrafficList.add(
-            TrafficNotification("violationType", "plateNumber", "details"));
+            TrafficNotification("violationType", "plateNumber", "details",3.4,56.4));
 
         final trafficNotification = TrafficNotification.fromJson(data);
         notificationTrafficList.add(trafficNotification);

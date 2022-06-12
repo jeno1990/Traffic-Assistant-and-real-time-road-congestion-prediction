@@ -194,10 +194,7 @@ class _SignupState extends State<Signup> {
                           phone_number: phone_numberController.text,
                           address: addressController.text,
                           password: passwordController.text);
-                           Get.snackbar(
-                                "Success", "Registered successfully!",
-                                duration: Duration(seconds: 10),
-                                snackPosition: SnackPosition.BOTTOM);
+                          
 
                       if(first_nameController.text==""||last_nameController.text==""||emailController.text==""||addressController.text==""||passwordController.text==""||phone_numberController.text==""){
                         Get.snackbar("error","all fields should be filled",
@@ -216,6 +213,10 @@ class _SignupState extends State<Signup> {
                                   return Center(child: CircularProgressIndicator(),);
                                 });
                      await APIService.register(model);
+                      Get.snackbar(
+                                "Success", "Registered successfully!",
+                                duration: Duration(seconds: 10),
+                                snackPosition: SnackPosition.BOTTOM);
                       }catch(err){
                          Get.snackbar("Network error", "try again",
                               // backgroundColor: Colors.redAccent[100],

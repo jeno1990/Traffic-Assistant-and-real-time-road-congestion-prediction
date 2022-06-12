@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_traffic/controllers/driver_controller/crowded_streetController.dart';
 import 'package:mobile_traffic/controllers/driver_controller/driver_dashboardController.dart';
 
 import 'package:mobile_traffic/screens/driver/driver_home.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 class DriverDashBoard extends StatelessWidget {
   // const DriverHome({ Key? key }) : super(key: key);
  DriverDashboardController controller = Get.put(DriverDashboardController());
+  CrowdedStreetController listRoadsController = Get.put(CrowdedStreetController());
 
   @override
   Widget build(BuildContext context) {

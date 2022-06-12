@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/' 
-        , page: ()=>TrafficDashBoard(),
+        , page: ()=>Login(),
         ),
          GetPage(
           name: '/driver_login' 
@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
         )
 
       ],
+
       //home: const LoginPage(),
       // routes: {
       //   '/': (context) => _defaultHome,

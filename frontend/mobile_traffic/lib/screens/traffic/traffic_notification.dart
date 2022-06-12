@@ -5,6 +5,7 @@ import 'package:mobile_traffic/controllers/traffic_conrollers/traffic_notificati
 import 'package:mobile_traffic/models/notification_model.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:mobile_traffic/screens/signup/login.dart';
+import 'package:mobile_traffic/screens/traffic/reported_accident.dart';
 import 'package:mobile_traffic/screens/traffic/violations.dart';
 import 'package:mobile_traffic/services/api_service.dart';
 import 'package:mobile_traffic/services/shared_services.dart';
@@ -20,7 +21,7 @@ class TrafficNotification extends StatelessWidget {
 
     Size size = MediaQuery.of(context).size;
     return DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
             body: Container(
           width: size.width,
@@ -54,9 +55,6 @@ class TrafficNotification extends StatelessWidget {
                     text: 'Driving Violations',
                   ),
                   Tab(
-                    text: 'Issued Cases',
-                  ),
-                  Tab(
                     text: 'Reported Cases',
                   ),
                 ],
@@ -70,10 +68,7 @@ class TrafficNotification extends StatelessWidget {
               child: TabBarView(
                 children: [
                   Violations(),
-                  
-
-                  Violations(),
-                  Violations(),
+                  ReportedAccident()
                 ],
               ),
             ))

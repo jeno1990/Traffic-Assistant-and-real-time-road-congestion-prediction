@@ -2,18 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobile_traffic/controllers/driver_controller/crowded_streetController.dart';
 import 'package:mobile_traffic/controllers/traffic_conrollers/traffic_notificationController.dart';
+import 'package:mobile_traffic/models/crowded_street_requestModel.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 // import 'package:mobile_traffic/screens/common_components/traffic_background.dart';
 import 'package:mobile_traffic/screens/traffic/components/bottom_navigation.dart';
 
 class StreetList extends StatelessWidget {
   // const Violations({ Key? key }) : super(key: key);
+  late final CrowdedStreetRequestModel model;
+  StreetList(this.model);
   bool isActive = true;
-  final notificationController = Get.put(CrowdedStreetController());
-
+  // final notificationController = Get.put(CrowdedStreetController());
+  // var crowdedlist = Get.find<CrowdedStreetController>();
   @override
   Widget build(BuildContext context) {
+    print(
+        "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhk");
+    print(model);
     Size size = MediaQuery.of(context).size;
+    // notificationController.crowdedList[index][0]+"-->"+notificationController.crowdedList[index][1]),
+
     return Expanded(
         //child: Obx(() {
         // print(notifiCationController.notificationList.length);
@@ -43,25 +51,26 @@ class StreetList extends StatelessWidget {
         child: GetBuilder<CrowdedStreetController>(
             builder: (notificationController) {
       return ListView.builder(
-        padding: EdgeInsets.only(top: 0),
-        // physics: NeverScrollableScrollPhysics(),
-        itemCount: notificationController.notificationList.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) => Card(
-          color: Colors.white70,
-          child: ListTile(
-            // shape: ShapeBorder(),
-            tileColor: Colors.white,
-            leading: CircleAvatar(
-              child: Icon(Icons.car_repair), //Text("${index+1}"),
-            ),
-            title: Text(""),
-              //notificationController.notificationList[index][0]+"-->"+notificationController.notificationList[index][1]),
-            subtitle: Text(""),
-              //"In  "+notificationController.notificationList[index][2]+"  street  crowdedness upto 345 cars with avarage speed 34"),
-          ),
-        ),
-      );
+          padding: EdgeInsets.only(top: 0),
+          itemCount: notificationController.crowdedList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            print(notificationController.crowdedList[index]);
+
+            return Card(
+              color: Colors.white70,
+              child: ListTile(
+                tileColor: Colors.white,
+                leading: CircleAvatar(
+                  child: Icon(Icons.car_repair), //Text("${index+1}"),
+                ),
+                title: Text(
+                    ""), //  notificationController.crowdedList[index][0]+"-->"+notificationController.crowdedList[index][1]),
+                subtitle: Text(""),
+                //"In  "+notificationController.notificationList[index][2]+"  street  crowdedness upto 345 cars with avarage speed 34"),
+              ),
+            );
+          });
     }));
   }
 }

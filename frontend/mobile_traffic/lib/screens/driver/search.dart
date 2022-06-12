@@ -17,23 +17,28 @@ class _SearchScreenState extends State<SearchScreen> {
   final crowdedStreetController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   	return AppBar(
-		title: const Text(
-		"Driver",
-		),
-		actions: [
-		IconButton(
-			onPressed: () {
-			// method to show the search bar
-			showSearch(
-				context: context,
-				// delegate to customize the search bar
-				delegate: CustomSearchDelegate()
-			);
-			},
-			icon: const Icon(Icons.search),
-		)
-		],
-	);
+   	return Scaffold(
+            appBar: AppBar(
+         title: const Text(
+         "Search",
+         ),
+         actions: [
+         IconButton(
+           onPressed: () {
+           // method to show the search bar
+           showSearch(
+             context: context,
+             // delegate to customize the search bar
+             delegate: CustomSearchDelegate()
+           );
+           },
+           icon: const Icon(Icons.search),
+         )
+         ],
+       ),
+       body: Center(
+         child: Text("Search here ..."),
+       ),
+          );
   }
 }

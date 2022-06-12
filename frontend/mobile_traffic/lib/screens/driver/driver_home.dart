@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobile_traffic/controllers/driver_controller/crowded_streetController.dart';
 import 'package:mobile_traffic/screens/common_components/Button.dart';
 import 'package:mobile_traffic/screens/common_components/header_text.dart';
 import 'package:mobile_traffic/screens/driver/custom_search_delegate.dart';
@@ -19,6 +20,7 @@ import 'package:get/get.dart';
 
 class DriverHome extends StatelessWidget {
   // const DriverHome({ Key? key }) : super(key: key);
+
   LocationController location_controller = Get.put(LocationController());
   @override
   Widget build(BuildContext context) {
@@ -58,28 +60,7 @@ class DriverHome extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Container(
-                //   padding: EdgeInsets.all(10),
-                //   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                //   width: size.width,
-                //   height: 40,
-                //   // color: Colors.white,
-                //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(20),
-                //       color: Colors.white),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.start,
-                //     children: [
-                //       SizedBox(
-                //         width: 10,
-                //       ),
-                      // TextFormField(
-                      //   decoration: InputDecoration(labelText: 'search here'),
-                      // style: TextStyle(),
-                      // )
-                //     ],
-                //   ),
-                // ),
+             
                 Container(
                   width: size.width,
                   child: TabBar(
@@ -100,52 +81,7 @@ class DriverHome extends StatelessWidget {
                     color: Colors.white,
                     child: TabBarView(children: [
                       MapCircles(),
-                      // Stack(
-                      //   children: [
-                      //     Obx(()=>
-                      //     FlutterMap(
-                      //       options: MapOptions(
-                              
-                      //         // onTap: (point){
-                      //         //   location =
-                      //         // },
-                      //         enableScrollWheel: true,
-                      //         center: LatLng(location_controller.getLocationData().latitude as double ,location_controller.getLocationData().longitude as double),
-                      //         zoom: 17.0,
-                              
-                      //       ),
-                      //       layers: [
-                      //         TileLayerOptions(
-                      //           urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      //           subdomains: ['a', 'b', 'c'],
-                      //           attributionBuilder: (_) {
-                      //             return Text("");
-                      //           },
-                      //         ),
-                      //         MarkerLayerOptions(
-                      //           markers: [
-                      //             Marker(
-                      //               width: 80.0,
-                      //               height: 80.0,
-                      //               point: LatLng((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double),
-                      //               builder: (ctx) =>Icon(
-                      //                 Icons.location_on,
-                      //                 color: Colors.red,
-                      //                 size: 50,)),
-                      //           ],
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      //   Positioned(
-                      //     right: 10,
-                      //     top:10,
-                      //     child: GestureDetector(
-                      //       onTap: (){
-                      //         Get.to(OSMap((location_controller.getLocationData().latitude == null ) ? 1.0 : location_controller.getLocationData().latitude as double ,(location_controller.getLocationData().longitude == null )?1.0:location_controller.getLocationData().longitude as double));
-                      //         },
-                      //       child: Icon(Icons.explore_rounded,size: 35,)))
-                      //   ]), //the first tab
+                      //the first tab
 
                       Container(
                         //the second tab
