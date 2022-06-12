@@ -60,7 +60,9 @@ const driver_signup = function (req, res) {
               //user.save().then().catch() you can use promise like this also
               if (err) {
                 //if error send that to user
-                res.status(500).json({ data: err, msg: " internal server error" });
+                res
+                  .status(500)
+                  .json({ data: err, msg: " internal server error" });
               } else {
                 //Send response to the user that registration process is complete
                 res.status(201);
@@ -80,6 +82,7 @@ const driver_signup = function (req, res) {
 
 const driver_login = function (req, res) {
   let { email, password } = req.body;
+  console.log("email: " + email, "password: " + password);
   //checks that both email and password is provided at api call
   if (email === "" || password === "") {
     res.status(400);

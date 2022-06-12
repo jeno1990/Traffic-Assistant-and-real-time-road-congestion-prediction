@@ -2,10 +2,10 @@ const mongoose =require('mongoose');
 //Driver  report schema
 const Reported_accident= new mongoose.Schema(
     {
-        driver_id:{
-            type:mongoose.Schema.ObjectId,
-            
-        },
+            driver_id:{
+                type:mongoose.Schema.ObjectId,
+                
+            },
 
             accident_type:{
                 type:String,
@@ -20,11 +20,6 @@ const Reported_accident= new mongoose.Schema(
                
             },
            }
-    
-        
-        
-
-    
 );
 
 

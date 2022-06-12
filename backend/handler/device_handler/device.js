@@ -6,7 +6,7 @@ const Device_location = require("../../models/device_locations.model");
 
 const overspeed = function (req, res) {
   let { lat, lon, speed, plate_num } = req.body; //add plate number as reqest body
-  if (!lat || !lon || !speed) {
+  if (!lat || !lon || !speed || !plate_num) {
     res.status(400);
     res.json({ msg: "bad request" });
     return;
@@ -48,6 +48,7 @@ const add_location = function (req, res) {
   });
   res.status(200).json({ msg: "new device added" }); //ok response
 };
+
 // to be done just demo
 
 const number_of_vehcle = function (req, res) {

@@ -7,6 +7,7 @@ const Device_location = new Schema(
         latitude: { type: String }, 
         longitude: { type: String}, 
         speed: { type: Number}, 
+        plate_num: {type : String},
         createdAt: { type: Date, default: Date.now, index: { expires: 300 } }, //set ttl, automatic deletion after 5m
     },
     {

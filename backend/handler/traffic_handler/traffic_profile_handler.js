@@ -4,9 +4,9 @@ const Reported_accident = require("../../models/report_accident.model");
 // const sendMail = require('../helpers/sendEmail')
 
 const traffic_signup = function (req, res) {
-  let { first_name, last_name, email, password } = req.body;
+  let { first_name, last_name, email } = req.body;
   if (first_name === "" || email === "") {
-    res.json({ status: 0, data: "error", msg: " Enter all fields" });
+    return res.status(400).json({msg: " all fields should be filled" });
   } else {
     Traffic.findOne({ email: email }, function (err, traffic) {
       if (err) console.log(err);
@@ -30,10 +30,9 @@ const traffic_signup = function (req, res) {
         bcrypt.genSalt(10, function (err, salt) {
           bcrypt.hash(traffic.password, salt, function (err, hash) {
             if (err) {
-              res.json({
-                status: 0,
+              res.status(500).json({
                 data: err,
-                msg: " error while hashing password",
+                msg: "Internal server error",
               });
             }
             traffic.password = hash;
@@ -42,16 +41,13 @@ const traffic_signup = function (req, res) {
               //user.save().then().catch() you can use promise like this also
               if (err) {
                 //if error send that to user
-                res.json({
-                  code: 500,
+                res.status(500).json({
                   status: 0,
                   data: err,
-                  msg: "internale server error",
+                  msg: "Internal server error",
                 });
               } else {
                 try {
-                  //----------------- TRY TO MAKE IT ONLY SAVE USER INFORMATION IF PASSWORD IS DELIVERD----->
-                  //this will send password with provided email address
                   require("../../helpers/sendEmail")(
                     traffic.email,
                     traffic.password
@@ -61,10 +57,9 @@ const traffic_signup = function (req, res) {
                 }
 
                 //Send response to the user that registration process is complete
-                res.json({
-                  status: 1,
+                res.status(200).json({
                   data: traffic,
-                  msg: `Thank You for registering.`,
+                  msg: "traffic added Successfully added",
                 });
               }
             });
@@ -152,8 +147,6 @@ const reported_cases = function (req, res) {
 };
 
 const traffic_report_form = function (req, res) {
-  console.log("inside the traffic_report_form");
-
   let { violation_type, plate_number, driver_name, action_taken, comment } =
     req.body;
   //checks that both email and password is provided at api call

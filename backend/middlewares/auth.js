@@ -5,6 +5,7 @@ const config = process.env;
 
 const authenticate = (req, res, next) => {
   // const token = req.body.token || req.query.token || req.headers["Authorization"];
+  // console.log(req.headers);
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
   if (!token) {

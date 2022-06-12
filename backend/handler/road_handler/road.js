@@ -4,18 +4,7 @@ const pathModel = require("../../models/path.model");
 const Destination = require("../../models/destinations.model");
 const Device_location = require("../../models/device_locations.model")
 const nearby_controller = require("../../controllers/nearby")
-/*
-    the body should contains
-    -   road name (unique)
-    -   [
-            { lat , long },
-            { lat , long }
-        ]
-    -   speed limit 
-    -   ending adress ---
 
-
-*/
 const add_roads = function (req, res) {
   let { road_name, speed_limit, tracking_points } = req.body;
   let roads = new RoadModel({
@@ -63,7 +52,7 @@ const add_path = function (req, res) {
       addDestination(destination);
     }
   });
-
+  console.log("list of roads : "+ list_of_roads);
   if (!list_of_roads) {
     res.status(400).json({ msg: "BAD REQUEST!" });
     return;
@@ -78,6 +67,7 @@ const add_path = function (req, res) {
       res.status(500).json({ msg: "SERVER ERROR" });
       return;
     }
+    console.log("path added");
     res.status(200).json({ msg: "successfully added new path", _id: data._id });
   });
 };
@@ -85,7 +75,7 @@ const add_path = function (req, res) {
 const get_path_roads = function (req, res) {
   let starting_point = req.query.sp;
   let destination = req.query.des;
-
+  console.log("st: "+starting_point+" des: "+destination);
   if (starting_point == "" || destination === "") {
     res.status(400).json({ msg: "BAD REQUEST" });
     return;
@@ -150,8 +140,7 @@ const get_congesion_info = function async (req, res) {
             return;
         }
         var tracking_points = data[0].tracking_points;
-        
-        
+
         //for each points registerd for that road find the number of vehcles moving and sumup to find total
         Device_location.find({})
         .exec()
